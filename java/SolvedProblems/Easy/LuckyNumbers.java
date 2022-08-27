@@ -1,3 +1,4 @@
+package SolvedProblems.Easy;
 import java.util.*;
 import java.io.*;
 import java.math.BigInteger;
