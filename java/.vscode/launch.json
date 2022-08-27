@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch LuckyNumbers",
+            "request": "launch",
+            "mainClass": "LuckyNumbers",
+            "projectName": "java_7caa055"
+        },
+        {
+            "type": "java",
+            "name": "Launch Football",
+            "request": "launch",
+            "mainClass": "Football",
+            "projectName": "java_7caa055"
+        },
+        {
+            "type": "java",
+            "name": "Launch TeamCForces",
+            "request": "launch",
+            "mainClass": "TeamCForces",
+            "projectName": "java_7caa055"
+        },
+        {
+            "type": "java",
+            "name": "Launch DangerousDive",
+            "request": "launch",
+            "mainClass": "DangerousDive",
+            "projectName": "java_7caa055"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "java_7caa055"
+        },
+        {
+            "type": "java",
+            "name": "Launch DangerousDrive",
+            "request": "launch",
+            "mainClass": "DangerousDrive",
+            "projectName": "java_7caa055"
+        },
+        {
+            "type": "java",
+            "name": "Launch BrokenKeyboard",
+            "request": "launch",
+            "mainClass": "BrokenKeyboard",
+            "projectName": "java_7caa055"
+        },
+        {
+            "type": "java",
+            "name": "Launch Sleep",
+            "request": "launch",
+            "mainClass": "Sleep",
+            "projectName": "java_7caa055"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch LongWords",
+            "request": "launch",
+            "mainClass": "LongWords",
+            "projectName": "java_7caa055"
+        }
+    ]
+}
