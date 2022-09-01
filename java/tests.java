@@ -1,9 +1,9 @@
-import java.util.*;
+//import java.util.*;
 import java.io.*;
 
 public class tests {
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner sc;
+        //Scanner sc;
         /* 
         try {
             sc = new Scanner(new File("input.txt"));
@@ -19,11 +19,23 @@ public class tests {
 
         //int a = 4; // 0100
         //int b = 5;// 1010
+/* 
+        int a = 100;
 
-        int c =  13456 << 21;
+        System.out.println("a: " + Integer.toBinaryString(a) + ", #: " + a);
 
-        System.out.println(c);
-    }
+        System.out.println("~a: " + Integer.toBinaryString(~a) + ", #: " + ~a);
+        System.out.println("~a + 1: " + Integer.toBinaryString(~a+1) + ", #: " + (~a + 1));
+    */
+
+    // n % x == n & x-1 only if x = power of two.
+
+    System.out.println(21 % 8);  // 1
+    System.out.println(21 & 7);  // 10101
+                                 // 00111 
+                                 // 00101
+
+}
 
     public static void problem() {
         
