@@ -9,6 +9,7 @@ import java.io.*;
 public class DeliciousBubbleTea {
     // FastReader template from:
     // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
+    
     // For fast input output
     static class FastReader {
         BufferedReader br;

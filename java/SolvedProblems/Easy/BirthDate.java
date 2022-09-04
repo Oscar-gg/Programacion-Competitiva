@@ -3,9 +3,11 @@ import java.util.*;
 import java.io.*;
 
 // Code by: @Oscar-gg
+
 class Main {
     // FastReader template from:
     // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
+    
     // For fast input output
     static class FastReader {
         BufferedReader br;
@@ -57,6 +59,7 @@ class Main {
     }
 
     // end of fast i/o code
+
     public static void main(String[] args) {
         FastReader reader = new FastReader();
 
