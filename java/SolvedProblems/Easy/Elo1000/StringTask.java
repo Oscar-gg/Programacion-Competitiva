@@ -1,13 +1,15 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.Elo1000;
 import java.util.*;
 import java.io.*;
 
 // Code by: @Oscar-gg
 
-class Main {
+// Exercise from: https://codeforces.com/problemset/problem/118/A
+
+public class StringTask {
     // FastReader template from:
     // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
-    
+
     // For fast input output
     static class FastReader {
         BufferedReader br;
@@ -57,35 +59,27 @@ class Main {
             return str;
         }
     }
-
     // end of fast i/o code
 
     public static void main(String[] args) {
         FastReader reader = new FastReader();
 
-        int people = reader.nextInt();
+        String input = reader.next();
 
-        String nameY = "", nameO = "";
+        char[] arr = "aoyeui".toCharArray();
 
-        int oldest = Integer.MAX_VALUE;
-        int youngest = -1;
+        HashSet<Character> vowels = new HashSet<Character>();
 
-        for(int i = 0; i < people; i++){
-            String[] s = reader.nextLine().split(" ");
-            int daysAlive = Integer.parseInt(s[1]) +
-                            Integer.parseInt(s[2]) * 31 +
-                            Integer.parseInt(s[3]) * 31 * 12;
-            if (daysAlive < oldest ){
-                oldest = daysAlive;
-                nameO = s[0];
-            } else if (daysAlive > youngest){
-                youngest = daysAlive;
-                nameY = s[0];
-            }
+        for (char a: arr){
+            vowels.add(a);
         }
 
-        System.out.println(nameY);
-        System.out.println(nameO);
+        for(int i = 0; i < input.length(); i++){
+            char curr = Character.toLowerCase(input.charAt(i));
+            if (!vowels.contains(curr)){
+                System.out.print("." + curr);
+            }
+        }
 
     }
 }

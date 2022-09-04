@@ -1,15 +1,11 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.Elo800;
 import java.util.*;
 import java.io.*;
+import java.lang.Math;
 
 // Code by: @Oscar-gg
 
-// Exercise from: https://open.kattis.com/problems/bubbletea
-
-public class DeliciousBubbleTea {
-    // FastReader template from:
-    // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
-    
+public class Sleep {
     // For fast input output
     static class FastReader {
         BufferedReader br;
@@ -63,38 +59,45 @@ public class DeliciousBubbleTea {
     // end of fast i/o code
     public static void main(String[] args) {
         FastReader reader = new FastReader();
+        int cases = reader.nextInt();
+
+        for (int x = 0; x < cases; x++){
+            sleepingTime(reader);
+        }
+    }
+
+    public static void sleepingTime(FastReader reader){
         int n = reader.nextInt();
+        int time = reader.nextInt() * 60 + reader.nextInt();
+        int oH, oM;
+        int minDif = 1500, temp, difference;
+        boolean notNull = false; 
+        int nextDay = 1500;
 
-        int np[] = new int[n];
-
-        for(int i = 0; i < n; i++){
-            np[i] = reader.nextInt();
-        }
-
-        int m = reader.nextInt();
-        int mp[] = new int[m];
-
-        for(int i = 0; i < m; i++){
-            mp[i] = reader.nextInt();
-        }
-
-        int minCost = Integer.MAX_VALUE;
-
-        for(int i = 0; i < n; i++){
-            int k = reader.nextInt();
-            for(int x = 0; x < k; x++){
-                int tempc = np[i];
-                tempc += mp[reader.nextInt()-1];
-                if (tempc < minCost){
-                    minCost = tempc;
+        for (int i = 0; i < n; i++){
+            temp = reader.nextInt() * 60 + reader.nextInt();
+            difference = temp-time;
+            if (difference < minDif){
+                if (difference < 0){
+                    if (Math.abs(difference) < nextDay){
+                        nextDay = temp;
+                    }
+                } else {
+                    minDif = temp-time;
+                    notNull = true;
                 }
             }
+            
         }
 
-        int money = reader.nextInt();
-    
-        money -= minCost;
+        if (!notNull){
+            minDif = 1440 - time + nextDay;
+        }
+        
+        oH = minDif / 60;
+        oM = minDif % 60;
 
-        System.out.println(money/minCost);
+        System.out.println(Integer.toString(oH) + " " + Integer.toString(oM));
     }
+
 }

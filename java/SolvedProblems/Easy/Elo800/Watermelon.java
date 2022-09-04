@@ -1,11 +1,10 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.Elo800;
 import java.util.*;
 import java.io.*;
 
 // Code by: @Oscar-gg
-public class RegistrationSystem {
-    // FastReader template from:
-    // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
+
+public class Watermelon {
     // For fast input output
     static class FastReader {
         BufferedReader br;
@@ -59,28 +58,17 @@ public class RegistrationSystem {
     // end of fast i/o code
     public static void main(String[] args) {
         FastReader reader = new FastReader();
+        
+        int input = reader.nextInt();
 
-        solution(reader);
-
-    }
-
-    public static void solution(FastReader reader){
-        int cases = reader.nextInt();
-
-        HashMap<String, Integer> data = new HashMap<String, Integer>();
-
-        for(int i = 0; i < cases; i++){
-            String input = reader.nextLine();
-            if (!data.containsKey(input)){
-                System.out.println("OK");
-                data.put(input, 1);
-            } else {
-                int c = data.get(input);
-                System.out.println(input + c);
-                data.replace(input, c+1);
-            }
+        if (input == 2){
+            System.out.print("NO");
+            System.exit(0);
         }
 
-
+        if (input % 2 == 0)
+            System.out.print("YES");
+        else   
+            System.out.print("NO");
     }
 }

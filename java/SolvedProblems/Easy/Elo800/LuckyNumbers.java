@@ -1,4 +1,4 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.Elo800;
 import java.util.*;
 import java.io.*;
 import java.math.BigInteger;

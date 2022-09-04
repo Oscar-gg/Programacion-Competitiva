@@ -1,15 +1,15 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.AlgorithmsClub;
 import java.util.*;
 import java.io.*;
 
 // Code by: @Oscar-gg
 
-// Exercise from: https://codeforces.com/problemset/problem/118/A
+// Exercise from: https://open.kattis.com/problems/bubbletea
 
-public class StringTask {
+public class DeliciousBubbleTea {
     // FastReader template from:
     // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
-
+    
     // For fast input output
     static class FastReader {
         BufferedReader br;
@@ -59,27 +59,42 @@ public class StringTask {
             return str;
         }
     }
-    // end of fast i/o code
 
+    // end of fast i/o code
     public static void main(String[] args) {
         FastReader reader = new FastReader();
+        int n = reader.nextInt();
 
-        String input = reader.next();
+        int np[] = new int[n];
 
-        char[] arr = "aoyeui".toCharArray();
-
-        HashSet<Character> vowels = new HashSet<Character>();
-
-        for (char a: arr){
-            vowels.add(a);
+        for(int i = 0; i < n; i++){
+            np[i] = reader.nextInt();
         }
 
-        for(int i = 0; i < input.length(); i++){
-            char curr = Character.toLowerCase(input.charAt(i));
-            if (!vowels.contains(curr)){
-                System.out.print("." + curr);
+        int m = reader.nextInt();
+        int mp[] = new int[m];
+
+        for(int i = 0; i < m; i++){
+            mp[i] = reader.nextInt();
+        }
+
+        int minCost = Integer.MAX_VALUE;
+
+        for(int i = 0; i < n; i++){
+            int k = reader.nextInt();
+            for(int x = 0; x < k; x++){
+                int tempc = np[i];
+                tempc += mp[reader.nextInt()-1];
+                if (tempc < minCost){
+                    minCost = tempc;
+                }
             }
         }
 
+        int money = reader.nextInt();
+    
+        money -= minCost;
+
+        System.out.println(money/minCost);
     }
 }

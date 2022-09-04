@@ -1,12 +1,11 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.AlgorithmsClub;
 import java.util.*;
 import java.io.*;
-import java.math.BigInteger;
-
-/*https://codeforces.com/contest/160/problem/B*/
 
 // Code by: @Oscar-gg
-public class UTicket {
+public class RegistrationSystem {
+    // FastReader template from:
+    // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
     // For fast input output
     static class FastReader {
         BufferedReader br;
@@ -61,52 +60,27 @@ public class UTicket {
     public static void main(String[] args) {
         FastReader reader = new FastReader();
 
-        int n = reader.nextInt();
+        solution(reader);
 
-        BigInteger d = new BigInteger(reader.next());
+    }
 
-        int[] fh = new int[n];
-        int[] sh = new int[n];
+    public static void solution(FastReader reader){
+        int cases = reader.nextInt();
 
-        for(int i = 0; i < n; i++){
-            sh[i] = (d.mod(BigInteger.TEN)).intValue();
-            d = d.divide(BigInteger.TEN);
-        }
+        HashMap<String, Integer> data = new HashMap<String, Integer>();
 
-        for(int i = 0; i < n; i++){
-            fh[i] = d.mod(BigInteger.TEN).intValue();
-            d = d.divide(BigInteger.TEN);
-        }
-
-        Arrays.sort(fh);
-        Arrays.sort(sh);
-
-        int c = 0;
-
-        for(int i = 0; i < n; i++){
-            if((fh[i] < sh[i])){
-                c++;
+        for(int i = 0; i < cases; i++){
+            String input = reader.nextLine();
+            if (!data.containsKey(input)){
+                System.out.println("OK");
+                data.put(input, 1);
+            } else {
+                int c = data.get(input);
+                System.out.println(input + c);
+                data.replace(input, c+1);
             }
         }
 
-        if (c == n){
-            System.out.println("YES");
-            return;
-        }
 
-        c = 0;
-
-        for(int i = 0; i < n; i++){
-            if((fh[i] > sh[i])){
-                c++;
-            }
-        }
-
-        if (c == n){
-            System.out.println("YES");
-            return;
-        }
-        
-        System.out.println("NO");
     }
 }

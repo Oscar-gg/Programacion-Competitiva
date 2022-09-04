@@ -1,10 +1,13 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.AlgorithmsClub;
 import java.util.*;
 import java.io.*;
 
 // Code by: @Oscar-gg
 
-public class Watermelon {
+class Main {
+    // FastReader template from:
+    // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
+    
     // For fast input output
     static class FastReader {
         BufferedReader br;
@@ -56,19 +59,33 @@ public class Watermelon {
     }
 
     // end of fast i/o code
+
     public static void main(String[] args) {
         FastReader reader = new FastReader();
-        
-        int input = reader.nextInt();
 
-        if (input == 2){
-            System.out.print("NO");
-            System.exit(0);
+        int people = reader.nextInt();
+
+        String nameY = "", nameO = "";
+
+        int oldest = Integer.MAX_VALUE;
+        int youngest = -1;
+
+        for(int i = 0; i < people; i++){
+            String[] s = reader.nextLine().split(" ");
+            int daysAlive = Integer.parseInt(s[1]) +
+                            Integer.parseInt(s[2]) * 31 +
+                            Integer.parseInt(s[3]) * 31 * 12;
+            if (daysAlive < oldest ){
+                oldest = daysAlive;
+                nameO = s[0];
+            } else if (daysAlive > youngest){
+                youngest = daysAlive;
+                nameY = s[0];
+            }
         }
 
-        if (input % 2 == 0)
-            System.out.print("YES");
-        else   
-            System.out.print("NO");
+        System.out.println(nameY);
+        System.out.println(nameO);
+
     }
 }

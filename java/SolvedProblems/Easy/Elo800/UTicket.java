@@ -1,11 +1,12 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.Elo800;
 import java.util.*;
 import java.io.*;
+import java.math.BigInteger;
+
+/*https://codeforces.com/contest/160/problem/B*/
 
 // Code by: @Oscar-gg
-public class Theatre {
-    // FastReader template from:
-    // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
+public class UTicket {
     // For fast input output
     static class FastReader {
         BufferedReader br;
@@ -61,30 +62,51 @@ public class Theatre {
         FastReader reader = new FastReader();
 
         int n = reader.nextInt();
-        int m = reader.nextInt();
-        int a = reader.nextInt();
 
-        if (a > (long)n*m){
-           System.out.println(1);
-           return;
+        BigInteger d = new BigInteger(reader.next());
+
+        int[] fh = new int[n];
+        int[] sh = new int[n];
+
+        for(int i = 0; i < n; i++){
+            sh[i] = (d.mod(BigInteger.TEN)).intValue();
+            d = d.divide(BigInteger.TEN);
         }
 
-        if (n % a != 0){
-            if (a > n){
-               n = a; 
-            } else {
-                n += a - (n % a);
-            } 
+        for(int i = 0; i < n; i++){
+            fh[i] = d.mod(BigInteger.TEN).intValue();
+            d = d.divide(BigInteger.TEN);
         }
 
-        if (m % a != 0){
-            if (a > m){
-                m = a;
-            } else {
-                m += a - (m % a);
+        Arrays.sort(fh);
+        Arrays.sort(sh);
+
+        int c = 0;
+
+        for(int i = 0; i < n; i++){
+            if((fh[i] < sh[i])){
+                c++;
             }
         }
+
+        if (c == n){
+            System.out.println("YES");
+            return;
+        }
+
+        c = 0;
+
+        for(int i = 0; i < n; i++){
+            if((fh[i] > sh[i])){
+                c++;
+            }
+        }
+
+        if (c == n){
+            System.out.println("YES");
+            return;
+        }
         
-        System.out.println((long)n/a * m/a);
+        System.out.println("NO");
     }
 }

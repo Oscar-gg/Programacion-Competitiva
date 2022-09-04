@@ -1,4 +1,4 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.AlgorithmsClub;
 import java.util.*;
 import java.io.*;
 

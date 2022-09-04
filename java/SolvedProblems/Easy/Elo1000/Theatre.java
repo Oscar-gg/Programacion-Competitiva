@@ -1,10 +1,11 @@
-package SolvedProblems.Easy;
+package SolvedProblems.Easy.Elo1000;
 import java.util.*;
 import java.io.*;
 
 // Code by: @Oscar-gg
-
-public class LongWords {
+public class Theatre {
+    // FastReader template from:
+    // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
     // For fast input output
     static class FastReader {
         BufferedReader br;
@@ -59,18 +60,31 @@ public class LongWords {
     public static void main(String[] args) {
         FastReader reader = new FastReader();
 
-        int testCases = reader.nextInt();
+        int n = reader.nextInt();
+        int m = reader.nextInt();
+        int a = reader.nextInt();
 
-        for (int x = 0; x < testCases; x++){
-            String temp = reader.nextLine();
-            if (temp.length() <= 10){
-                System.out.println(temp);
-            } else {
-                int length = temp.length();
-                System.out.println(temp.charAt(0) + Integer.toString(length-2) + temp.charAt(length-1));
-            }
-
+        if (a > (long)n*m){
+           System.out.println(1);
+           return;
         }
 
+        if (n % a != 0){
+            if (a > n){
+               n = a; 
+            } else {
+                n += a - (n % a);
+            } 
+        }
+
+        if (m % a != 0){
+            if (a > m){
+                m = a;
+            } else {
+                m += a - (m % a);
+            }
+        }
+        
+        System.out.println((long)n/a * m/a);
     }
 }
