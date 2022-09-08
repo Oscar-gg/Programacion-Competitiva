@@ -1,5 +1,6 @@
 //import java.util.*;
 import java.io.*;
+import java.util.BitSet;
 
 public class tests {
     public static void main(String[] args) throws FileNotFoundException {
@@ -29,15 +30,23 @@ public class tests {
     */
 
     // n % x == n & x-1 only if x = power of two.
-
+    /*
     System.out.println(21 % 8);  // 1
     System.out.println(21 & 7);  // 10101
                                  // 00111 
                                  // 00101
-
+    */
+    test();
 }
 
-    public static void problem() {
-        
+    public static void test() {
+        BitSet s = new BitSet(10);
+        s.set(0);
+        s.set(1);
+        s.set(4);
+        s.flip(5);
+        s.flip(5);
+        s.set(6);
+        System.out.println(s);
     }
 }

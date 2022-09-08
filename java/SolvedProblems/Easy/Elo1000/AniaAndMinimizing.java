@@ -1,13 +1,12 @@
 package SolvedProblems.Easy.Elo1000;
-
 import java.util.*;
 import java.io.*;
 
 // Code by: @Oscar-gg
 
-// Problem from: https://codeforces.com/problemset/problem/1020/B
-
-public class Badge {
+// Problem from: https://codeforces.com/problemset/problem/1230/B
+ 
+public class AniaAndMinimizing {
     // FastReader template from:
     // https://www.geeksforgeeks.org/java-competitive-programming-setup-in-vs-code-with-fast-i-o-and-snippets/
 
@@ -64,35 +63,42 @@ public class Badge {
 
     public static void main(String[] args) {
         FastReader reader = new FastReader();
-        int s = reader.nextInt();
 
-        int[] p = new int[s];
+        int n = reader.nextInt();
+        int k = reader.nextInt();
+        String s = reader.next();
 
-        for (int i = 0; i < s; i++) {
-            p[i] = reader.nextInt();
+        if (k == 0){
+            System.out.println(s);
+            return;
+        } else if (n == 1){
+            System.out.println(0);
+            return;
         }
 
-        for (int i = 0; i < s; i++) {
-            solve(i, p);
-        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(1);
 
-    }
+        k -= (s.charAt(0) == '1') ? 0 : 1;
+        int i = 1;
 
-    public static void solve(int s, int[] p) {
-        BitSet st = new BitSet(s);
-
-        st.flip(s);
-        int l = s;
-
-        for (int i = 0; i < p.length; i++) {
-            if (!st.get(p[l] - 1)) {
-                st.set(p[l] - 1);
-                l = p[l] - 1;
-            } else {
-                System.out.print((p[l]) + " ");
-                return;
+        for(; i <= k; i++){
+            if (i >= n){
+                break;
             }
+
+            if (s.charAt(i) == '0')
+                k += 1;
+            
+                
+            sb.append(0);
         }
+
+        if (k + 1 < n){
+            sb.append(s.substring(k + 1));
+        }
+
+        System.out.println(sb.toString());
 
     }
 }
