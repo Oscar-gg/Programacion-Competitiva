@@ -6,10 +6,15 @@ import java.math.BigInteger;
 
 // Code made after reading editorial from Meta Hacker Cup.
 
+// Past Solution (see commit):
 // Veredict: Accepted
-// Execution time: 400484 ms...
-// Complexity: 3,000 * Q
-// Before attempting to improve complexity
+// Execution time: 4000484 ms...
+// Complexity: 3,001 * Q
+
+// Current commit:
+// Veredict: Accepted
+// Execution time: 45388 ms
+// Complexity: 3,001 * 3,001 (in loop that calculates inconvenience).
 
 public class B1Editorial {
     // FastReader template from:
@@ -82,10 +87,10 @@ public class B1Editorial {
 
     public static void main(String[] args) {
 
-        // memoPrepare();
-        readMemo(memo);
-
         long start = System.currentTimeMillis();
+
+        // memoPrepare(); run only once.
+        readMemo(memo);
 
         FastReader reader = new FastReader();
 
@@ -117,23 +122,38 @@ public class B1Editorial {
 
         int q = reader.nextInt();
 
-        BigInteger sum = BigInteger.ZERO;
+        int[] xis = new int[3001];
+        int[] yis = new int[3001];
 
         for (int i = 0; i < q; i++) {
-            int xi = reader.nextInt();
-            int yi = reader.nextInt();
+            int nextxi = reader.nextInt();
+            int nextyi = reader.nextInt();
+            xis[nextxi] = xis[nextxi] + 1;
+            yis[nextyi] = yis[nextyi] + 1;
+        }
+
+        BigInteger sum = BigInteger.ZERO;
+
+        for (int i = 0; i < xis.length; i++) {
+            int xi = xis[i];
+            int yi = yis[i];
+
+            if (xi == 0 && yi == 0)
+                continue;
 
             for (int x = 0; x < ai.length; x++) {
-                int diff = Math.abs(x - xi);
-                if (ai[x] != 0)
-                    sum = sum.add(BigInteger.valueOf(memo[diff])
-                            .multiply(BigInteger.valueOf(ai[x])));
+                int diff = Math.abs(x - i);
 
-                diff = Math.abs(x - yi);
-
-                if (bi[x] != 0)
+                if (xi != 0 && ai[x] != 0)
                     sum = sum.add(BigInteger.valueOf(memo[diff])
-                            .multiply(BigInteger.valueOf(bi[x])));
+                            .multiply(BigInteger.valueOf(ai[x]))
+                            .multiply(BigInteger.valueOf(xi)));
+
+                if (yi != 0 && bi[x] != 0)
+                    sum = sum.add(BigInteger.valueOf(memo[diff])
+                            .multiply(BigInteger.valueOf(bi[x]))
+                            .multiply(BigInteger.valueOf(yi)));
+
                 sum = sum.mod(mod);
             }
         }
