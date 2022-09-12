@@ -9,6 +9,7 @@ import java.math.BigInteger;
 // Veredict: Accepted
 // Execution time: 400484 ms...
 // Complexity: 3,000 * Q
+// Before attempting to improve complexity
 
 public class B1Editorial {
     // FastReader template from:
