@@ -4,7 +4,9 @@ import java.math.BigInteger;
 
 // Code by: @Oscar-gg
 
-// Problem from:
+//https://www.facebook.com/codingcompetitions/hacker-cup/2022/round-1/solutions
+
+// Incorrect Code; doesn't pass tests. Pending changes.
 
 public class B2Editorial {
     // FastReader template from:
