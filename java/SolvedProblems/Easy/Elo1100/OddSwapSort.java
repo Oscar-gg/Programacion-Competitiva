@@ -1,4 +1,5 @@
 package SolvedProblems.Easy.Elo1100;
+
 import java.util.*;
 import java.io.*;
 
@@ -125,7 +126,7 @@ public class OddSwapSort {
     }
 
     public static void finishR(FastReader r, int l, int h) {
-        for (; l < h-1; l++) {
+        for (; l < h - 1; l++) {
             r.nextInt();
         }
     }
@@ -170,18 +171,18 @@ public class OddSwapSort {
  * 
  * 
  * public static boolean swapper(int[] ni, int i) {
-
-        while (i > 0 && ni[i - 1] > ni[i]) {
-            if (((ni[i - 1] + ni[i]) % 2) == 0) {
-                System.out.println("No");
-                return false;
-            } else {
-                int temp = ni[i - 1];
-                ni[i - 1] = ni[i];
-                ni[i] = temp;
-                i--;
-            }
-        }
-        return true;
-    }
+ * 
+ * while (i > 0 && ni[i - 1] > ni[i]) {
+ * if (((ni[i - 1] + ni[i]) % 2) == 0) {
+ * System.out.println("No");
+ * return false;
+ * } else {
+ * int temp = ni[i - 1];
+ * ni[i - 1] = ni[i];
+ * ni[i] = temp;
+ * i--;
+ * }
+ * }
+ * return true;
+ * }
  */
