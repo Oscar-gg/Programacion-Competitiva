@@ -36,7 +36,9 @@ public class tests {
                                  // 00111 
                                  // 00101
     */
-    test();
+    //test();
+    double  a = Math.ceil(0);
+    System.out.println(a);
 }
 
     public static void test() {
