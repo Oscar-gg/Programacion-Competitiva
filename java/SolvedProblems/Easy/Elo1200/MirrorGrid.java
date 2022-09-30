@@ -1,9 +1,10 @@
+package SolvedProblems.Easy.Elo1200;
 import java.util.*;
 import java.io.*;
 
 // Code by: @Oscar-gg
 
-// Problem from:
+// Problem from: https://codeforces.com/problemset/problem/1703/E
 
 public class MirrorGrid {
     // FastReader template from:
@@ -82,44 +83,69 @@ public class MirrorGrid {
         }
 
         int totalChanges = 0;
-        int pair = (n % 2 == 0) ? 0 : 1;
+
+        int indexTrx = n-1;
+        int indexBry = n-1;
+        int indexBlx = 0;
 
         for (int i = 0; i < n / 2; i++) {
+            int indexTry = 0;
+            int indexBrx = n-1;
+            int indexBly = n-1;
+
             for (int x = 0; x < n / 2; x++) {
                 int count1 = 0;
 
-                if (start[i][x])
+                if (start[i][x]){
                     count1++;
+                }
 
-                if (start[i][n / 2 + x + pair])
+                if (start[indexTry][indexTrx]){
                     count1++;
+                }
+                    
+                if (start[indexBry][indexBrx]){
+                    count1++;
+                }  
 
-                if (start[n / 2 + i + pair][x])
+                if (start[indexBly][indexBlx]){
                     count1++;
-
-                if (start[n / 2 + i + pair][n / 2 + x + pair])
-                    count1++;
+                }           
 
                 if (count1 <= 2) {
                     totalChanges += count1;
                 } else {
                     totalChanges += 4 - count1;
                 }
-                System.out.println(totalChanges);
 
+                indexTry++;
+                indexBrx--;
+                indexBly--;
             }
+
+            indexTrx--;
+            indexBry--;
+            indexBlx++;
         }
 
+        int pair = (n % 2 == 0) ? 0 : 1;
+
+        
         if (pair == 1) {
+            int indexTy = 0;
+            int indexBy = n-1;
+            int indexLx = 0;
+            int indexRx = n-1;
+            
             for (int i = 0; i < n / 2; i++) {
                 int count1 = 0;
-                if (start[n / 2 + pair][i])
+                if (start[n / 2][indexTy++])
                     count1++;
-                if (start[n / 2 + pair][n - i - 1])
+                if (start[indexLx++][n / 2])
                     count1++;
-                if (start[i][n / 2 + pair])
+                if (start[indexRx--][n / 2])
                     count1++;
-                if (start[n - i - 1 ][n / 2 + pair])
+                if (start[n/2][indexBy--])
                     count1++;
 
                 if (count1 <= 2) {
@@ -130,6 +156,7 @@ public class MirrorGrid {
 
             }
         }
+        
 
         System.out.println(totalChanges);
     }

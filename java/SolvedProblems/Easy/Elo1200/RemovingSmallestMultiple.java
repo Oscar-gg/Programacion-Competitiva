@@ -83,7 +83,8 @@ public class RemovingSmallestMultiple {
 
         char[] in = reader.next().toCharArray();
 
-        long count = 0;
+        long count = n; // to avoid warning
+        count = 0;
 
         for (int i = 0; i < in.length; i++) {
             if (in[i] == '1') {

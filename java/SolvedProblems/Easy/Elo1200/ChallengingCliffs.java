@@ -1,7 +1,6 @@
 package SolvedProblems.Easy.Elo1200;
 import java.util.*;
 import java.io.*;
-import java.lang.reflect.Array;
 
 // Code by: @Oscar-gg
 
