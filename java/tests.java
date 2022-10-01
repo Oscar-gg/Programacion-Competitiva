@@ -29,7 +29,7 @@ public class tests {
         System.out.println("~a + 1: " + Integer.toBinaryString(~a+1) + ", #: " + (~a + 1));
     */
 
-    // n % x == n & x-1 only if x = power of two.
+    // n % x = n & x-1 only if x = power of two.
     /*
     System.out.println(21 % 8);  // 1
     System.out.println(21 & 7);  // 10101
