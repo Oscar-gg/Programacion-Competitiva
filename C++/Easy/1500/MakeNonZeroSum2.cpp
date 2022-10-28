@@ -1,6 +1,6 @@
 // Code by @Oscar-gg
 
-// Problem from:
+// Problem from: https://codeforces.com/contest/1753/problem/A2
 
 // Template from: https://www.geeksforgeeks.org/how-to-setup-competitive-programming-in-visual-studio-code-for-c/
 

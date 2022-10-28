@@ -75,7 +75,7 @@ int main()
 
     for (int b = 0; b < (1 << n); b++)
     {
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < b; i++){
             if (b & (1 << i)) subset.push_back(i);
         }
         subset.push_back(-1);
@@ -83,7 +83,7 @@ int main()
 
     for (auto x : subset){
         if (x == -1) {
-            cout << '\n'; // Split sets in rows.
+            cout << '\n'; // Split sets into rows.
             continue;
         }
         cout << x << " ";
