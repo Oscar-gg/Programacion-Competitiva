@@ -1,6 +1,6 @@
 // Code by @Oscar-gg
 
-// Problem from:
+// Problem from: https://codeforces.com/gym/104120/problem/l
 
 // Template from: https://www.geeksforgeeks.org/how-to-setup-competitive-programming-in-visual-studio-code-for-c/
 
@@ -44,43 +44,23 @@ double eps = 1e-12;
 #define sz(x) ((ll)(x).size())
 
 v32 stations[1000000];
-
 bool visited[1000000];
-bool found = false;
-int dist = 0;
+int parent[1000000];
 
-struct Node
+int dfs(int visit, int parent, bool vis[1000000], int &cont)
 {
-    int value;
-    int distance;
-};
+    vis[visit] = true;
+    cont++;
 
-void dfs(Node node, int target)
-{
-    if (found)
-        return;
-
-    if (visited[node.value])
-        return;
-
-    visited[node.value] = true;
-
-    for (int i = 0; i < stations[node.value].size(); i++)
+    for (int i = 0; i < stations[visit].size(); i++)
     {
-        if (stations[node.value][i] == target)
+        int current = stations[visit][i];
+        if (current == parent)
+            continue;
+        if (!vis[current])
         {
-            found = true;
-            dist = node.distance + 1;
-            return;
+            dfs(current, parent, vis, cont);
         }
-    }
-
-    for (int i = 0; i < stations[node.value].size(); i++)
-    {
-        if (found)
-            return;
-        Node newNode{stations[node.value][i], node.distance + 1};
-        dfs(newNode, target);
     }
 }
 
@@ -88,21 +68,60 @@ void solve()
 {
     int n, x;
     cin >> n >> x;
+    x--;
+
+    pair<int, int> p{0, 0};
 
     for (int i = 0; i < n - 1; i++)
     {
-        int A, B;
-        cin >> A >> B;
-        A--;
-        B--;
-        stations[A].push_back(B);
-        stations[B].push_back(A);
+        int a, b;
+        cin >> a >> b;
+        a--;
+        b--;
+
+        stations[a].push_back(b);
+        stations[b].push_back(a);
     }
 
-    Node start{0, 0};
-    dfs(start, x - 1);
+    queue<pair<int, int>> q;
+    q.push(p);
+    visited[0] = true;
 
-    cout << dist << '\n';
+    int distance = -1;
+    while (!q.empty())
+    {
+        pair<int, int> curr = q.front();
+        q.pop();
+        if (curr.first == x)
+        {
+            distance = curr.second;
+            break;
+        }
+        for (int i = 0; i < stations[curr.first].size(); i++)
+        {
+            int neighbor = stations[curr.first][i];
+            if (!visited[neighbor])
+            {
+                q.push({neighbor, curr.second + 1});
+                visited[neighbor] = true;
+                parent[neighbor] = curr.first;
+            }
+        }
+    }
+
+    int unvisited = 0;
+    for (int i = 0; i < stations[parent[x]].size(); i++)
+    {
+        int curr = stations[parent[x]][i];
+        if (curr == parent[parent[x]])
+            continue;
+
+        bool vis[1000000]{};
+        dfs(curr, parent[x], vis, unvisited);
+    }
+
+    int ans = (n * 2) - distance - (unvisited * 2);
+    cout << ans << '\n';
 }
 
 int main()
