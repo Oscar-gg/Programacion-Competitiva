@@ -10,7 +10,15 @@
                 "${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "-DOSCAR_GG"
+                "-DOSCAR_GG",
+                "-Wall",
+                "-Wextra",
+                "-Wshadow",
+                "-Wconversion",
+                "-Wfloat-equal",
+                "-Wduplicated-cond",
+                "-Wlogical-op"
+
             ],
             "options": {
                 "cwd": "${fileDirname}"
