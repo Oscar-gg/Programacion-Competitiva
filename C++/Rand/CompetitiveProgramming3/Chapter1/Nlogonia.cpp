@@ -1,8 +1,6 @@
 // Code by @Oscar-gg
 
-// After reading editorial
-
-// Problem from: https://codeforces.com/contest/1791/problem/D
+// Problem from:
 
 // Template from: https://www.geeksforgeeks.org/how-to-setup-competitive-programming-in-visual-studio-code-for-c/
 
@@ -10,6 +8,7 @@
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
 #pragma GCC optimize("unroll-loops")
 #include <bits/stdc++.h>
+#include <chrono>
 
 using namespace std;
 
@@ -32,7 +31,8 @@ double eps = 1e-12;
 #define rforn(i, s) for (ll i = s; i >= 0; i--)
 #define rforsn(i, s, e) for (ll i = s; i >= e; i--)
 #define ln "\n"
-#define dbg(x) cout << #x << " = " << x << ln
+#define dbg(v) \
+    cout << "Line(" << __LINE__ << ") -> " << #v << " = " << (v) << endl;
 #define mp make_pair
 #define pb push_back
 #define fi first
@@ -45,62 +45,56 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
-int countL(vector<int>& check){
-    int count = 0;
-    for (int i = 0; i < check.size(); i++){
-        if (check[i] > 0){
-            count++;
-        }
-    }
-    return count;
-}
-
-void solve()
-{
-    int n;
-    string s;
-    cin >> n;
-    cin >> s;
-
-    vector<int> left(26);
-    vector<int> right(26);
-
-    for (int i = 0; i < n; i++){
-        char c = s[i];
-        right[c - 'a']++;
-    }
-
-    int ans = countL(right);
-
-    for (int i = 0; i < n; i++){
-        int c = s[i] - 'a';
-        left[c]++;
-        right[c]--;
-        ans = max(ans, countL(left) + countL(right));
-    }
-
-    cout << ans << "\n";
-}
-
 int main()
 {
 #ifdef OSCAR_GG
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
+    auto start = chrono::high_resolution_clock::now();
 #endif
     fast_cin();
-    ll t;
-    cin >> t;
-
-    string c = "aloha";
-    string d = "carlos";
-
-    string s = c.substr(1, 2);
-
-    cout << s;
-    for (int it = 1; it <= t; it++)
+    ll k;
+    cin >> k;
+    while (k)
     {
-        solve();
+        int n, m;
+        cin >> n >> m;
+
+        for (int i = 0; i < k; i++)
+        {
+            int x, y;
+            cin >> x >> y;
+
+            if (x == n || y == m)
+            {
+                cout << "divisa\n";
+            }
+            else if (x > n && y > m)
+            {
+                cout << "NE\n";
+            }
+            else if (x > n && y < m)
+            {
+                cout << "SE\n";
+            }
+            else if (x < n && y > m)
+            {
+                cout << "NO\n";
+            }
+            else if (x < n && y < m)
+            {
+                cout << "SO\n";
+            }
+        }
+
+        cin >> k;
     }
+#ifdef OSCAR_GG
+    auto end = chrono::high_resolution_clock::now();
+    double executionTime = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
+    executionTime *= 1e-6;
+    cout << "Execution Time: " << fixed << executionTime << setprecision(6);
+    cout << " ms\n";
+#endif
     return 0;
 }

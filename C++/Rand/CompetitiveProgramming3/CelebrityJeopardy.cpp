@@ -8,6 +8,7 @@
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
 #pragma GCC optimize("unroll-loops")
 #include <bits/stdc++.h>
+#include <chrono>
 
 using namespace std;
 
@@ -30,7 +31,8 @@ double eps = 1e-12;
 #define rforn(i, s) for (ll i = s; i >= 0; i--)
 #define rforsn(i, s, e) for (ll i = s; i >= e; i--)
 #define ln "\n"
-#define dbg(x) cout << #x << " = " << x << ln
+#define dbg(v) \
+    cout << "Line(" << __LINE__ << ") -> " << #v << " = " << (v) << endl;
 #define mp make_pair
 #define pb push_back
 #define fi first
@@ -45,27 +47,29 @@ double eps = 1e-12;
 
 void solve()
 {
-    int n;
-    string s;
-    cin >> n;
-    cin >> s;
-
-    sort(s.begin(), s.end());
-    cout << s;
 }
-
 int main()
 {
 #ifdef OSCAR_GG
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
+    auto start = chrono::high_resolution_clock::now();
 #endif
     fast_cin();
-    ll t;
-    cin >> t;
-    for (int it = 1; it <= t; it++)
+    string line;
+    bool open = true;
+
+    while (getline(cin, line))
     {
-        solve();
+        cout << line << '\n';
     }
+
+#ifdef OSCAR_GG
+    auto end = chrono::high_resolution_clock::now();
+    double executionTime = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
+    executionTime *= 1e-6;
+    cout << "Execution Time: " << fixed << executionTime << setprecision(6);
+    cout << " ms\n";
+#endif
     return 0;
 }
