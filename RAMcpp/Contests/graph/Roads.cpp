@@ -1,6 +1,6 @@
 // Code by @Oscar-gg
 
-// Problem from: https://cses.fi/problemset/task/1745/
+// Problem from:
 
 // Template from: https://www.geeksforgeeks.org/how-to-setup-competitive-programming-in-visual-studio-code-for-c/
 
@@ -45,48 +45,68 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+void makeElement(int v, vector<int> &parent, vector<int> &size)
+{
+    parent[v] = v;
+    size[v] = 1;
+}
+
+int findParent(int v, vector<int> &parent)
+{
+    if (parent[v] == v)
+        return v;
+    return parent[v] = findParent(parent[v], parent);
+}
+
+void merge(int a, int b, vector<int> &parent, vector<int> &size)
+{
+    a = findParent(a, parent);
+    b = findParent(b, parent);
+    if (size[a] < size[b])
+        swap(a, b);
+
+    parent[b] = a;
+    size[a] += size[b];
+}
+
 void solve()
 {
-    int n;
-    cin >> n;
+    int n, m;
+    cin >> n >> m;
 
-    bitset<10000001> bset;
-    bset.set(0);
+    vector<int> parent(n + 1);
+    vector<int> size(n + 1);
 
-    vector<int> nums(n);
-
-    for (auto &x : nums)
+    for (int i = 1; i <= n; i++)
     {
-        cin >> x;
+        makeElement(i, parent, size);
     }
 
-    sort(nums.begin(), nums.end());
-
-    int maxInd = 0;
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < m; i++)
     {
-        vector<int> positions;
-        for (int j = 0; j <= maxInd; j++)
+        int u, v;
+        cin >> u >> v;
+
+        merge(u, v, parent, size);
+    }
+
+    vector<pair<int, int>> newR;
+
+    for (int i = 2; i <= n; i++)
+    {
+        if (findParent(i, parent) != findParent(1, parent))
         {
-            if (bset.test(j))
-            {
-                positions.push_back(j + nums[i]);
-                maxInd = max(maxInd, j + nums[i]);
-            }
+            newR.push_back({1, i});
+            merge(1, i, parent, size);
         }
-        for (auto pos : positions)
-            bset.set(pos);
     }
 
-    cout << bset.count() - 1 << "\n";
+    cout << newR.size() << "\n";
 
-    for(int i = 1; i < bset.size(); i++){
-        if (bset[i])
-            cout << i << " ";
+    for (int i = 0; i < newR.size(); i++)
+    {
+        cout << newR[i].first << " " << newR[i].second << "\n";
     }
-
-    cout << "\n";
 }
 
 int main()

@@ -1,6 +1,6 @@
 // Code by @Oscar-gg
 
-// Problem from: https://cses.fi/problemset/task/1745/
+// Problem from:
 
 // Template from: https://www.geeksforgeeks.org/how-to-setup-competitive-programming-in-visual-studio-code-for-c/
 
@@ -45,44 +45,55 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+vector<pair<int, int>> g[300001];
+
 void solve()
 {
-    int n;
-    cin >> n;
+    int n, k, d;
+    cin >> n >> k >> d;
 
-    bitset<10000001> bset;
-    bset.set(0);
+    vector<int> v(n + 1, -1);
+    queue<int> q;
+    unordered_set<int> usedR;
 
-    vector<int> nums(n);
-
-    for (auto &x : nums)
+    for (int i = 0; i < k; i++)
     {
-        cin >> x;
+        int index;
+        cin >> index;
+        v[index] = 0;
+        q.push(index);
     }
 
-    sort(nums.begin(), nums.end());
-
-    int maxInd = 0;
-
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i < n; i++)
     {
-        vector<int> positions;
-        for (int j = 0; j <= maxInd; j++)
+        int u, v;
+        cin >> u >> v;
+        g[u].push_back({v, i});
+        g[v].push_back({u, i});
+    }
+
+    while (!q.empty())
+    {
+        int front = q.front();
+        q.pop();
+
+        for (int i = 0; i < g[front].size(); i++)
         {
-            if (bset.test(j))
+            int neighbour = g[front][i].first;
+            if (v[neighbour] == -1 && v[front] + 1 <= d)
             {
-                positions.push_back(j + nums[i]);
-                maxInd = max(maxInd, j + nums[i]);
+                v[neighbour] = v[front] + 1;
+                usedR.insert(g[front][i].second);
+                q.push(neighbour);
             }
         }
-        for (auto pos : positions)
-            bset.set(pos);
     }
 
-    cout << bset.count() - 1 << "\n";
+    cout << n - 1 - usedR.size() << "\n";
 
-    for(int i = 1; i < bset.size(); i++){
-        if (bset[i])
+    for (int i = 1; i < n; i++)
+    {
+        if (!usedR.count(i))
             cout << i << " ";
     }
 

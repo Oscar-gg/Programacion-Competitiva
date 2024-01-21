@@ -1,6 +1,6 @@
 // Code by @Oscar-gg
 
-// Problem from: https://cses.fi/problemset/task/1745/
+// Problem from:
 
 // Template from: https://www.geeksforgeeks.org/how-to-setup-competitive-programming-in-visual-studio-code-for-c/
 
@@ -45,47 +45,56 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
 
+void dfs(int index, int cur, vector<vector<int>> &g, vector<int> &v, vector<int> &c, vector<int> &a)
+{
+    for (int i = 0; i < g[index].size(); i++)
+    {
+        int neighbour = g[index][i];
+        if (!v[neighbour])
+        {
+            v[neighbour] = true;
+            a[neighbour] = cur + c[neighbour];
+            dfs(neighbour, a[neighbour], g, v, c, a);
+            v[neighbour] = false;
+        }
+    }
+}
+
 void solve()
 {
-    int n;
-    cin >> n;
+    int n, q;
+    cin >> n >> q;
 
-    bitset<10000001> bset;
-    bset.set(0);
+    vector<int> c(n + 1);
+    vector<int> v(n + 1);
+    vector<int> a(n + 1);
+    vector<vector<int>> g(n + 1);
 
-    vector<int> nums(n);
-
-    for (auto &x : nums)
+    for (int i = 0; i < n - 1; i++)
     {
-        cin >> x;
+        int u, v;
+        cin >> u >> v;
+        g[u].push_back(v);
+        g[v].push_back(u);
     }
 
-    sort(nums.begin(), nums.end());
-
-    int maxInd = 0;
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < q; i++)
     {
-        vector<int> positions;
-        for (int j = 0; j <= maxInd; j++)
-        {
-            if (bset.test(j))
-            {
-                positions.push_back(j + nums[i]);
-                maxInd = max(maxInd, j + nums[i]);
-            }
-        }
-        for (auto pos : positions)
-            bset.set(pos);
+        int index, inc;
+        cin >> index >> inc;
+        c[index] += inc;
     }
 
-    cout << bset.count() - 1 << "\n";
+    v[1] = true;
+    a[1] = c[1];
 
-    for(int i = 1; i < bset.size(); i++){
-        if (bset[i])
-            cout << i << " ";
+    dfs(1, a[1], g, v, c, a);
+
+    for (int i = 1; i <= n; i++)
+    {
+        cout << a[i] << " ";
     }
-
+    
     cout << "\n";
 }
 
@@ -98,6 +107,7 @@ int main()
 #endif
     fast_cin();
     solve();
+
 #ifdef OSCAR_GG
     auto end = chrono::high_resolution_clock::now();
     double executionTime = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
