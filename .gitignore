@@ -4,3 +4,4 @@ PastInputs
 valB1.txt
 Ignore
 *.exe
+*.out
