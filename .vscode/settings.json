@@ -67,6 +67,14 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "typeindex": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "source_location": "cpp",
+        "string_view": "cpp",
+        "span": "cpp",
+        "barrier": "cpp",
+        "latch": "cpp",
+        "semaphore": "cpp",
+        "__split_buffer": "cpp",
+        "queue": "cpp"
     },
 }
