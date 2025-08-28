@@ -50,6 +50,45 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int x, y;
+    cin >> x >> y;
+
+    int total = 0;
+    int curD = 1;
+    bool dir = true;
+
+    if (y > x)
+    {
+        while (curD + x < y)
+        {
+            total += curD * 2;
+            curD *= 2;
+            total += curD * 2;
+            curD *= 2;
+            // cout << total << "\n";
+        }
+        total += abs(x - y);
+        cout << total << "\n";
+    }
+    else if (y < x)
+    {
+        total = 2;
+        curD = 2;
+        while (x - curD > y)
+        {
+            total += curD * 2;
+            curD *= 2;
+            total += curD * 2;
+            curD *= 2;
+            // cout << total << "\n";
+        }
+        total += abs(x - y);
+        cout << total << "\n";
+    }
+    else
+    {
+        cout << "0\n";
+    }
 }
 
 int main()
@@ -57,8 +96,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

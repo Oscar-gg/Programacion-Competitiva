@@ -50,6 +50,37 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+
+    vector<int> count(3);
+    vector<int> pos(3);
+
+    for (int i = 0; i < pos.size(); i++)
+        pos[i] = i;
+
+    for (int i = 0; i < n; i++)
+    {
+        int a, b, g;
+        cin >> a >> b >> g;
+        a--;
+        b--;
+        g--;
+
+        for (int j = 0; j < pos.size(); j++)
+        {
+            if (pos[j] == a)
+            {
+                pos[j] = b;
+            }
+            else if (pos[j] == b)
+                pos[j] = a;
+            if (pos[j] == g)
+                count[j]++;
+        }
+    }
+
+    cout << max({count[0], count[1], count[2]}) << "\n";
 }
 
 int main()
@@ -57,8 +88,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

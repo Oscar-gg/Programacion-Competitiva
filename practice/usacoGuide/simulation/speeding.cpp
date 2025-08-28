@@ -50,6 +50,45 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, m;
+    cin >> n >> m;
+    vector<int> a(n), al(n), b(m), bl(m);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+        cin >> al[i];
+    }
+    for (int i = 0; i < m; i++)
+    {
+        cin >> b[i];
+        cin >> bl[i];
+    }
+
+    int l = 0, r = 0;
+    int ans = 0;
+
+    while (l < n && r < m)
+    {
+        ans = max(ans, bl[r] - al[l]);
+
+        if (b[r] > a[l])
+        {
+            b[r] -= a[l];
+            l++;
+        }
+        else
+        {
+            a[l] -= b[r];
+            r++;
+
+            if (!a[l])
+            {
+                l++;
+            }
+        }
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
@@ -57,8 +96,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

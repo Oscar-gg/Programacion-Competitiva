@@ -50,6 +50,28 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int m, n, k;
+    cin >> m >> n >> k;
+
+    vector<string> o(m);
+    for (int i = 0; i < m; i++)
+    {
+        cin >> o[i];
+    }
+
+    for (int i = 0; i < m; i++)
+    {
+        string s = "";
+        for (int j = 0; j < o[i].size(); j++)
+        {
+            s += string(k, o[i][j]);
+        }
+
+        for (int rep = 0; rep < k; rep++)
+        {
+            cout << s << "\n";
+        }
+    }
 }
 
 int main()
@@ -57,8 +79,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t
+    t = 1;
     while (t--)
         s();
     return 0;

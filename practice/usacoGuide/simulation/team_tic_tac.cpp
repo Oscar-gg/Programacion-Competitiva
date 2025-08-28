@@ -50,6 +50,34 @@ typedef vector<ii> vii;
 
 void s()
 {
+    vector<string> m(3);
+    for (int i = 0; i < 3; i++)
+        cin >> m[i];
+
+    unordered_map<int, set<set<char>>> umap;
+
+    for (int i = 0; i < 3; i++)
+    {
+        set<char> cc;
+        cc.insert(m[i][0]);
+        cc.insert(m[i][1]);
+        cc.insert(m[i][2]);
+        umap[cc.size()].insert(cc);
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        set<char> cc;
+        cc.insert(m[0][i]);
+        cc.insert(m[1][i]);
+        cc.insert(m[2][i]);
+        umap[cc.size()].insert(cc);
+    }
+
+    set<char> cc{m[0][0], m[1][1], m[2][2]}, c2{m[2][0], m[1][1], m[0][2]};
+    umap[cc.size()].insert(cc);
+    umap[c2.size()].insert(c2);
+    cout << umap[1].size() << "\n";
+    cout << umap[2].size() << "\n";
 }
 
 int main()
@@ -57,8 +85,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

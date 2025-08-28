@@ -50,6 +50,28 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+
+    vector<int> a(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+
+    int ans = INT_MAX;
+
+    for (int i = 0; i < n; i++)
+    {
+        int cost = 0;
+        for (int j = i + 1; j < i + n; j++)
+        {
+            cost += (j - i) * a[j % n];
+        }
+        ans = min(ans, cost);
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
@@ -57,8 +79,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

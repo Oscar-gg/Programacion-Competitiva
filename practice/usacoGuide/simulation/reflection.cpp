@@ -50,6 +50,64 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, u;
+    cin >> n >> u;
+    vector<string> m(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> m[i];
+    }
+
+    vector<vector<int>> dotCounts(n / 2, vector<int>(n / 2));
+
+    int op = 0;
+
+    for (int i = 0; i < n / 2; i++)
+    {
+        for (int j = 0; j < n / 2; j++)
+        {
+            int q1 = m[i][j] == '.' ? 1 : 0;
+            int q2 = m[i][n - 1 - j] == '.' ? 1 : 0;
+            int q3 = m[n - 1 - i][j] == '.' ? 1 : 0;
+            int q4 = m[n - 1 - i][n - 1 - j] == '.' ? 1 : 0;
+
+            dotCounts[i][j] = q1 + q2 + q3 + q4;
+            op += min(dotCounts[i][j], 4 - dotCounts[i][j]);
+        }
+    }
+
+    cout << op << "\n";
+
+    for (int i = 0; i < u; i++)
+    {
+        int r, c;
+        cin >> r >> c;
+        r--;
+        c--;
+        bool dot = m[r][c] == '.';
+        m[r][c] = dot ? '#' : '.';
+
+        if (r + 1 > n / 2)
+        {
+            r = n - 1 - r;
+        }
+        if (c + 1 > n / 2)
+        {
+            c = n - 1 - c;
+        }
+
+        op -= min(dotCounts[r][c], 4 - dotCounts[r][c]);
+        if (dot)
+        {
+            dotCounts[r][c]--;
+        }
+        else
+        {
+            dotCounts[r][c]++;
+        }
+        op += min(dotCounts[r][c], 4 - dotCounts[r][c]);
+        cout << op << '\n';
+    }
 }
 
 int main()
@@ -57,8 +115,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

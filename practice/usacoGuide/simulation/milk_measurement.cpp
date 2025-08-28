@@ -50,15 +50,69 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<vector<pair<char, int>>> changes(100);
+
+    for (int i = 0; i < n; i++)
+    {
+        int d;
+        string s;
+        char c;
+        int dx;
+        cin >> d >> s >> c >> dx;
+        d--;
+
+        if (c == '-')
+            dx *= -1;
+        changes[d].push_back({s[0], dx});
+    }
+
+    int m = 7, e = 7, b = 7;
+    int ans = 0;
+    string st = "meb";
+
+    for (int i = 0; i < 100; i++)
+    {
+        for (int j = 0; j < changes[i].size(); j++)
+        {
+            if (changes[i][j].first == 'M')
+            {
+                m += changes[i][j].second;
+            }
+            else if (changes[i][j].first == 'E')
+            {
+                e += changes[i][j].second;
+            }
+            else
+            {
+                b += changes[i][j].second;
+            }
+        }
+        int maxQ = max({m, e, b});
+        string nst = "";
+        if (m == maxQ)
+            nst += 'm';
+        if (e == maxQ)
+            nst += 'e';
+        if (b == maxQ)
+            nst += 'b';
+        sort(nst.begin(), nst.end());
+        sort(st.begin(), st.end());
+
+        if (nst != st)
+            ans++;
+        st = nst;
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
 {
-    _
-
-        int t;
-    cin >> t;
-    // t = 1;
+    _ int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

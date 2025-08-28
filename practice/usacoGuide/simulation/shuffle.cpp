@@ -50,6 +50,34 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<int> a(n), f(n), inv(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+        a[i]--;
+    }
+    for (int i = 0; i < n; i++)
+        cin >> f[i];
+
+    for (int i = 0; i < n; i++)
+    {
+        inv[i] = a[i];
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        vector<int> c(n);
+        for (int j = 0; j < n; j++)
+        {
+            c[j] = f[inv[j]];
+        }
+        f = c;
+    }
+
+    for (auto it : f)
+        cout << it << "\n";
 }
 
 int main()
@@ -57,8 +85,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

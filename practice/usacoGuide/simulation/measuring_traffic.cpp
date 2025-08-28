@@ -50,6 +50,67 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+
+    vector<string> s(n);
+    vector<int> l(n), h(n);
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> s[i];
+        cin >> l[i] >> h[i];
+    }
+
+    int lb = 0, ub = 1001;
+    bool nf = true;
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (s[i] == "off")
+        {
+            lb += l[i];
+            ub += h[i];
+        }
+        else if (s[i] == "on")
+        {
+            lb -= h[i];
+            lb = max(lb, 0);
+            ub -= l[i];
+        }
+        else
+        {
+
+            lb = max(lb, l[i]);
+            ub = min(ub, h[i]);
+        }
+    }
+
+    cout << lb << " " << ub << "\n";
+
+    lb = 0, ub = 1001;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == "off")
+        {
+            lb -= h[i];
+            lb = max(lb, 0);
+            ub -= l[i];
+        }
+        else if (s[i] == "on")
+        {
+            lb += l[i];
+            ub += h[i];
+        }
+        else
+        {
+            lb = max(lb, l[i]);
+            ub = min(ub, h[i]);
+        }
+    }
+
+    cout << lb << " " << ub << "\n";
 }
 
 int main()
@@ -57,8 +118,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

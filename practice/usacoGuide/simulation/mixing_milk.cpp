@@ -50,6 +50,35 @@ typedef vector<ii> vii;
 
 void s()
 {
+    vector<pair<int, int>> milk(3);
+    for (int i = 0; i < 3; i++)
+    {
+        cin >> milk[i].first >> milk[i].second;
+    }
+    int op = 100;
+    int next = 1, cur = 0;
+    while (op--)
+    {
+        if (milk[cur].second > milk[next].first - milk[next].second)
+        {
+            milk[cur].second -= milk[next].first - milk[next].second;
+            milk[next].second = milk[next].first;
+        }
+        else
+        {
+            milk[next].second += milk[cur].second;
+            milk[cur].second = 0;
+        }
+        next++;
+        cur++;
+        next %= 3;
+        cur %= 3;
+    }
+
+    for (auto m : milk)
+    {
+        cout << m.second << "\n";
+    }
 }
 
 int main()
@@ -57,8 +86,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

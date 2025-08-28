@@ -50,6 +50,43 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    int maxN = 1001 * 2;
+    vector<vector<int>> f(maxN, vector<int>(maxN, INT_MAX));
+    int xi = maxN / 2, yi = maxN / 2;
+    unordered_map<char, pair<int, int>> umap{{'N', {-1, 0}}, {'S', {1, 0}}, {'E', {0, 1}}, {'W', {0, -1}}};
+
+    int time = 0;
+    f[xi][yi] = time;
+    int ans = INT_MAX;
+    for (int i = 0; i < n; i++)
+    {
+        char c;
+        cin >> c;
+        int s;
+        cin >> s;
+
+        while (s--)
+        {
+            time++;
+            xi += umap[c].first;
+            yi += umap[c].second;
+            if (f[xi][yi] != INT_MAX)
+            {
+                ans = min(ans, time - f[xi][yi]);
+            }
+            f[xi][yi] = time;
+        }
+    }
+    if (ans == INT_MAX)
+    {
+        cout << -1 << "\n";
+    }
+    else
+    {
+        cout << ans << "\n";
+    }
 }
 
 int main()
@@ -57,8 +94,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

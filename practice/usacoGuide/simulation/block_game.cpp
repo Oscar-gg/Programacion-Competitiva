@@ -50,6 +50,41 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<pair<string, string>> w(n);
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> w[i].first >> w[i].second;
+    }
+
+    vector<int> counts(26);
+
+    for (int i = 0; i < w.size(); i++)
+    {
+        for (int j = 0; j < 26; j++)
+        {
+            int c1 = 0;
+            for (int k = 0; k < w[i].first.size(); k++)
+            {
+                if (w[i].first[k] == 'a' + j)
+                    c1++;
+            }
+            int c2 = 0;
+            for (int k = 0; k < w[i].second.size(); k++)
+            {
+                if (w[i].second[k] == 'a' + j)
+                    c2++;
+            }
+            counts[j] += max(c1, c2);
+        }
+    }
+
+    for (int i = 0; i < 26; i++)
+    {
+        cout << counts[i] << "\n";
+    }
 }
 
 int main()
@@ -57,8 +92,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

@@ -50,6 +50,44 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<pair<int, int>> s(n), e(n);
+
+    for (int i = 0; i < n; i++)
+    {
+        int a, b, c;
+        cin >> a >> b >> c;
+
+        s[i] = {a, c};
+        e[i] = {b, c};
+    }
+    sort(s.begin(), s.end());
+    sort(e.begin(), e.end());
+    int total = 0;
+    int av = 0;
+
+    int l = 0, r = 0;
+
+    for (int i = 0; i <= 1005; i++)
+    {
+        if (e[r].first == i)
+        {
+            av += e[r].second;
+            r++;
+        }
+        if (s[l].first == i)
+        {
+            av -= s[l].second;
+            if (av < 0)
+            {
+                total += abs(av);
+                av = 0;
+            }
+            l++;
+        }
+    }
+    cout << total << "\n";
 }
 
 int main()
@@ -57,8 +95,8 @@ int main()
     _
 
         int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;
