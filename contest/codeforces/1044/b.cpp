@@ -50,15 +50,35 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+
+    vector<ll> g(n);
+    for (auto &v : g)
+        cin >> v;
+
+    priority_queue<ll> pq(g.begin(), g.end());
+    ll ans = 0;
+
+    while (!pq.empty() > 0)
+    {
+        auto f = pq.top();
+        pq.pop();
+        auto f2 = pq.top();
+        pq.pop();
+        ans += max(f, f2);
+        if (pq.empty())
+            break;
+        pq.push(f2 - min(f, f2));
+    }
+    cout << ans << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)

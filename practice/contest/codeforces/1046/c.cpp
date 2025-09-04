@@ -50,15 +50,38 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto &v : a)
+        cin >> v;
+
+    int longest = 0;
+    unordered_map<int, queue<int>> umap;
+
+    vector<int> dp(n);
+
+    for (int i = 0; i < n; i++)
+    {
+        if (i > 0)
+            dp[i] = dp[i - 1];
+        umap[a[i]].push(i);
+        if (umap[a[i]].size() == a[i])
+        {
+            int pos = dp[max(umap[a[i]].front() - 1, 0)] + a[i];
+            umap[a[i]].pop();
+            dp[i] = max(dp[i], pos);
+        }
+    }
+
+    cout << dp.back() << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)

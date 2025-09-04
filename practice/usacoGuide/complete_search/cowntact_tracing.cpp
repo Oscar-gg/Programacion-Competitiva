@@ -36,7 +36,7 @@
 #define pb push_back
 #define dbg(v) cout << "Line(" << __LINE__ << ") -> " << #v << " = " << (v) << endl;
 #define all(x) x.begin(), x.end()
-#define nl << "n";
+#define nl << "\n";
 
 using namespace std;
 
@@ -48,54 +48,80 @@ typedef vector<ii> vii;
 #define MAXN 10
 #define MOD 1000000007
 
-void explore(int i, int j, vector<string> &s)
+// editorial
+
+bool possible(int i, int k, vector<pair<int, pair<int, int>>> &in, string &s)
 {
-    vector<int> x{1, -1, 0, 0};
-    vector<int> y{0, 0, 1, -1};
-    s[i][j] = '#';
+    string inf(s.size(), '0');
+    inf[i] = '1';
+    vector<int> counts(s.size(), 0);
 
-    for (int it = 0; it < 4; it++)
+    for (int i = 0; i < in.size(); i++)
     {
-        int r = i + x[it];
-        int c = j + y[it];
-
-        if (r >= 0 && r < s.size() && c >= 0 && c < s[0].size() && s[r][c] == '.')
-            explore(r, c, s);
+        int v1 = in[i].second.first, v2 = in[i].second.second;
+        if (inf[v1] == '1')
+            counts[v1]++;
+        if (inf[v2] == '1')
+            counts[v2]++;
+        if (inf[v1] == '1' && counts[v1] <= k)
+            inf[v2] = '1';
+        if (inf[v2] == '1' && counts[v2] <= k)
+            inf[v1] = '1';
     }
+
+    return inf == s;
 }
 
 void s()
 {
-    int n, m;
-    cin >> n >> m;
-    int ans = 0;
+    int n, t;
+    cin >> n >> t;
+    string s;
+    cin >> s;
 
-    vector<string> s(n);
+    vector<pair<int, pair<int, int>>> in(t);
 
-    for (auto &si : s)
-        cin >> si;
+    for (int i = 0; i < t; i++)
+    {
+        cin >> in[i].first >> in[i].second.first >> in[i].second.second;
+        in[i].second.first--;
+        in[i].second.second--;
+    }
+    sort(in.begin(), in.end());
 
+    unordered_set<int> pat;
+    int minK = INT_MAX, maxK = -1;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
+        for (int k = 0; k <= t; k++)
         {
-            if (s[i][j] == '.')
+            if (possible(i, k, in, s))
             {
-                ans++;
-                explore(i, j, s);
+                pat.insert(i);
+                minK = min(minK, k);
+                maxK = max(maxK, k);
             }
         }
     }
 
-    cout
-        << ans << "\n";
+    cout << pat.size() << " " << minK << " ";
+    if (maxK == t)
+    {
+        cout << "Infinity\n";
+    }
+    else
+    {
+        cout << maxK << "\n";
+    }
 }
 
 int main()
 {
     _
 
-        int t;
+        freopen("tracing.in", "r", stdin);
+    freopen("tracing.out", "w", stdout);
+    int t;
     // cin >> t;
     t = 1;
     while (t--)

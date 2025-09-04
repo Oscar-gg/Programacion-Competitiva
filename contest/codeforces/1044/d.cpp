@@ -48,17 +48,40 @@ typedef vector<ii> vii;
 #define MAXN 10
 #define MOD 1000000007
 
+// solved after seeing editorial
+
 void s()
 {
+    ll n;
+    cin >> n;
+    vector<ll> h(n);
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> h[i];
+    }
+
+    vector<ll> dp(n + 1);
+    dp[0] = 0;
+    dp[1] = h[0];
+
+    for (ll i = 2; i <= n; i++)
+    {
+        dp[i] = dp[i - 1] + h[i - 1] - 1;
+        dp[i] = min(dp[i], dp[i - 2] + h[i - 2] + max(h[i - 1] - (i - 1), 0ll));
+    }
+
+    // for (auto c : dp)
+    //     cout << c << " ";
+    // cout << "\n";
+
+    cout << dp.back() << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)

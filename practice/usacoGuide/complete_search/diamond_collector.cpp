@@ -50,17 +50,35 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    for (auto &v : a)
+        cin >> v;
+    int ans = 0;
+    for (int i = 0; i <= 10000; i++)
+    {
+        int temp = 0;
+        for (int j = 0; j < n; j++)
+        {
+            if (a[j] >= i && a[j] <= i + k)
+                temp++;
+        }
+        ans = max(temp, ans);
+    }
+    cout << ans << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
+        freopen("diamond.in", "r", stdin);
+    freopen("diamond.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+
+    t = 1;
     while (t--)
         s();
     return 0;

@@ -50,17 +50,75 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> umap(n + 1);
+
+    for (int i = 0; i < m; i++)
+    {
+        int a, b;
+        cin >> a >> b;
+        umap[a].push_back(b);
+        umap[b].push_back(a);
+    }
+    vector<int> prev(n + 1, 0);
+
+    queue<int> q;
+    q.push(1);
+    prev[1] = 1;
+    bool pos = false;
+    while (!q.empty())
+    {
+        int f = q.front();
+        q.pop();
+        if (f == n)
+        {
+            pos = true;
+            break;
+        }
+
+        for (auto n : umap[f])
+        {
+            if (!prev[n])
+            {
+                prev[n] = f;
+                q.push(n);
+            }
+        }
+    }
+
+    if (pos)
+    {
+        vector<int> path{n};
+
+        while (path.back() != 1)
+        {
+            path.push_back(prev[path.back()]);
+        }
+
+        cout << path.size() nl;
+
+        for (int i = path.size() - 1; i >= 0; i--)
+        {
+            cout << path[i] << " ";
+        }
+
+        cout nl;
+    }
+    else
+    {
+        cout << "IMPOSSIBLE\n";
+    }
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

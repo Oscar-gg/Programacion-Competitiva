@@ -50,15 +50,53 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, a, b;
+    cin >> n >> a >> b;
+    bool onlyB = false;
+    if (b >= a)
+    {
+        onlyB = true;
+    }
+    bool possible = true;
+
+    bool even = n % 2 == 0;
+
+    if (!onlyB)
+    {
+        if (even && a % 2 != 0)
+        {
+            possible = false;
+        }
+        else if (!even && a % 2 != 1)
+        {
+            possible = false;
+        }
+    }
+
+    if (even && b % 2 != 0)
+    {
+        possible = false;
+    }
+    else if (!even && b % 2 != 1)
+    {
+        possible = false;
+    }
+
+    if (possible)
+    {
+        cout << "YES\n";
+    }
+    else
+    {
+        cout << "NO\n";
+    }
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)

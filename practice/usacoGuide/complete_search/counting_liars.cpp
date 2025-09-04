@@ -50,17 +50,49 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+
+    vector<pair<int, char>> v;
+
+    int countG = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        char d;
+        int p;
+        cin >> d >> p;
+        v.push_back({p, d});
+        if (d == 'G')
+            countG++;
+    }
+
+    sort(v.begin(), v.end());
+
+    int ans = INT_MAX;
+    int countL = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        int pos = v[i].first;
+        if (v[i].second == 'G')
+            countG--;
+        else
+        {
+            countL++;
+        }
+        ans = min(ans, countG + countL);
+    }
+    cout << ans << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

@@ -50,17 +50,39 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int x, y, m;
+    cin >> x >> y >> m;
+    vector<bool> dp(m + 1, false);
+    dp[0] = true;
+    int ans = 0;
+    for (int i = 0; i <= m; i++)
+    {
+        if (!dp[i])
+            continue;
+        ans = i;
+
+        if (i + x <= m)
+        {
+            dp[i + x] = true;
+        }
+        if (i + y <= m)
+        {
+            dp[i + y] = true;
+        }
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    freopen("pails.in", "r", stdin);
+    freopen("pails.out", "w", stdout);
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

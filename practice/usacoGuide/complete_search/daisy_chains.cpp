@@ -50,17 +50,39 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto &v : a)
+        cin >> v;
+
+    ll ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        unordered_set<int> uset;
+        ll sum = 0;
+        for (int j = i; j < n; j++)
+        {
+            uset.insert(a[j]);
+            sum += a[j];
+            int div = j - i + 1;
+            if (sum % div == 0 && uset.count(sum / div))
+            {
+                ans++;
+            }
+        }
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

@@ -50,15 +50,50 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+
+    ll ans = 0;
+
+    for (int i = 1; i < n; i += 2)
+    {
+        if (a[i - 1] > a[i])
+        {
+            ans += a[i - 1] - a[i];
+            a[i - 1] = a[i];
+        }
+        if (i + 1 < n && a[i + 1] > a[i])
+        {
+            ans += a[i + 1] - a[i];
+            a[i + 1] = a[i];
+        }
+        if (i + 1 < n && a[i + 1] + a[i - 1] > a[i])
+        {
+            int diff = a[i + 1] + a[i - 1] - a[i];
+            ans += diff;
+            if (a[i + 1] >= diff)
+            {
+                a[i + 1] -= diff;
+            }
+            else
+            {
+                diff -= a[i + 1];
+                a[i + 1] = 0;
+                a[i - 1] -= diff;
+            }
+        }
+    }
+    cout << ans << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)

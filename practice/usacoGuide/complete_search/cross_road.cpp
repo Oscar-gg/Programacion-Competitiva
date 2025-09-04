@@ -50,17 +50,47 @@ typedef vector<ii> vii;
 
 void s()
 {
+    string s;
+    cin >> s;
+
+    int cross = 0;
+
+    for (char i = 'A'; i <= 'Z'; i++)
+    {
+        int sI = 0;
+        for (int j = 0; j < s.size(); j++)
+        {
+            if (s[j] == i)
+            {
+                sI = j;
+                break;
+            }
+        }
+        unordered_set<char> uset;
+
+        for (int j = sI + 1; j < s.size(); j++)
+        {
+            if (s[j] == i)
+                break;
+            if (uset.count(s[j]))
+                uset.erase(s[j]);
+            else
+                uset.insert(s[j]);
+        }
+        cross += uset.size();
+    }
+
+    cout << cross / 2 << "\n";
 }
 
 int main()
 {
-    _;
-
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
+    _
+        freopen("circlecross.in", "r", stdin);
+    freopen("circlecross.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

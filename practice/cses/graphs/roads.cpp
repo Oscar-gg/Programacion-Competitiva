@@ -48,19 +48,72 @@ typedef vector<ii> vii;
 #define MAXN 10
 #define MOD 1000000007
 
+int get_parent(int n, vector<int> &p)
+{
+    if (p[n] == n)
+        return n;
+
+    return p[n] = get_parent(p[n], p);
+}
+
+void join(int n, int n2, vector<int> &p, vector<int> &s)
+{
+    n = get_parent(n, p);
+    n2 = get_parent(n2, p);
+
+    if (s[n2] > s[n])
+        swap(n2, n);
+
+    s[n] += s[n2];
+    p[n2] = n;
+}
+
 void s()
 {
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> parent(n + 1, -1), size(n + 1, 1);
+
+    for (int i = 1; i <= n; i++)
+        parent[i] = i;
+
+    for (int i = 0; i < m; i++)
+    {
+        int a, b;
+        cin >> a >> b;
+        join(a, b, parent, size);
+    }
+
+    // for (auto c : parent)
+    // {
+    //     cout << c << ' ';
+    // }
+    // cout nl;
+
+    vector<pair<int, int>> p;
+    for (int i = 2; i <= n; i++)
+    {
+        if (get_parent(i, parent) != get_parent(1, parent))
+        {
+            p.push_back({1, i});
+            join(i, 1, parent, size);
+        }
+    }
+
+    cout << p.size() nl;
+
+    for (auto r : p)
+        cout << r.first << " " << r.second << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

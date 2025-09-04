@@ -50,6 +50,66 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, m;
+    cin >> n >> m;
+    vector<int> t(100);
+    vector<pair<int, int>> airD(m), airR(m);
+    for (int i = 0; i < n; i++)
+    {
+        int s, ti, c;
+        cin >> s >> ti >> c;
+        s--;
+        ti--;
+        for (int j = s; j <= ti; j++)
+        {
+            t[j] = max(t[j], c);
+        }
+    }
+
+    for (int i = 0; i < m; i++)
+    {
+        cin >> airR[i].first >> airR[i].second;
+        airR[i].first--;
+        airR[i].second--;
+        cin >> airD[i].first >> airD[i].second;
+    }
+
+    int ans = INT_MAX;
+
+    for (int i = 0; i < (1 << m); i++)
+    {
+        int cost = 0;
+        vector<int> buy(100);
+
+        for (int j = 0; j < m; j++)
+        {
+            if (i & (1 << j))
+            {
+                cost += airD[j].second;
+                for (int k = airR[j].first; k <= airR[j].second; k++)
+                {
+                    buy[k] += airD[j].first;
+                }
+            }
+        }
+
+        bool pos = true;
+        for (int j = 0; j < buy.size(); j++)
+        {
+            if (buy[j] < t[j])
+            {
+                pos = false;
+                break;
+            }
+        }
+
+        if (pos)
+        {
+            ans = min(ans, cost);
+        }
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
@@ -59,8 +119,8 @@ int main()
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

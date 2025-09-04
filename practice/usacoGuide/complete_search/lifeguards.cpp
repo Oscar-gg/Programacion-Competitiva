@@ -50,17 +50,44 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<pair<int, int>> guards(n);
+
+    for (auto &v : guards)
+        cin >> v.first >> v.second;
+
+    int ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int pos = 0;
+        for (int j = 0; j <= 1000; j++)
+        {
+            for (int k = 0; k < n; k++)
+            {
+                if (i == k)
+                    continue;
+                if (guards[k].first <= j && j < guards[k].second)
+                {
+                    pos++;
+                    break;
+                }
+            }
+        }
+        ans = max(ans, pos);
+    }
+    cout << ans << '\n';
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    // cin >> t;
+    freopen("lifeguards.in", "r", stdin);
+    freopen("lifeguards.out", "w", stdout);
+    t = 1;
     while (t--)
         s();
     return 0;

@@ -50,15 +50,43 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+
+    vector<int> a(n);
+    for (auto &c : a)
+        cin >> c;
+
+    unordered_map<int, int> umap;
+    for (int i = 0; i < n; i++)
+    {
+        umap[a[i]]++;
+    }
+    bool pos = false;
+    for (auto p : umap)
+    {
+        if (p.second > 1)
+        {
+            pos = true;
+            break;
+        }
+    }
+
+    if (pos)
+    {
+        cout << "YES\n";
+    }
+    else
+    {
+        cout << "NO\n";
+    }
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)

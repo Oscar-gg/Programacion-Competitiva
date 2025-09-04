@@ -50,17 +50,37 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+
+    vector<int> a(n), b(n);
+    for (auto &v : a)
+        cin >> v;
+    for (auto &v : b)
+        cin >> v;
+
+    ll ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            ll s1 = abs(a[i] - a[j]);
+            ll s2 = abs(b[i] - b[j]);
+
+            ans = max(ans, (s1 * s1) + (s2 * s2));
+        }
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    // cin >>  t;
+    t = 1;
     while (t--)
         s();
     return 0;

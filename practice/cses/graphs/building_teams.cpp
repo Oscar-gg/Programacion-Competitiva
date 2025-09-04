@@ -48,19 +48,79 @@ typedef vector<ii> vii;
 #define MAXN 10
 #define MOD 1000000007
 
+void dfs(int node, unordered_map<int, bool> &color, unordered_map<int, unordered_set<int>> &umap, bool &possible, bool current)
+{
+    if (!possible)
+        return;
+
+    for (auto n : umap[node])
+    {
+        if (!color.count(n))
+        {
+            color[n] = !current;
+            dfs(n, color, umap, possible, !current);
+        }
+        else if (color[n] == current)
+        {
+            possible = false;
+            return;
+        }
+    }
+}
+
 void s()
 {
+
+    int n, m;
+    cin >> n >> m;
+
+    unordered_map<int, unordered_set<int>> umap;
+    unordered_map<int, bool> color;
+
+    for (int i = 0; i < m; i++)
+    {
+        int a, b;
+        cin >> a >> b;
+        umap[a].insert(b);
+        umap[b].insert(a);
+    }
+    bool possible = true;
+
+    for (int i = 1; i <= n; i++)
+    {
+        if (!color.count(i) && possible)
+            dfs(i, color, umap, possible, true);
+    }
+
+    if (possible)
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            if (color[i])
+            {
+                cout << 1;
+            }
+            else
+            {
+                cout << 2;
+            }
+            cout << " ";
+        }
+        cout << "\n";
+    }
+    else
+    {
+        cout << "IMPOSSIBLE\n";
+    }
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

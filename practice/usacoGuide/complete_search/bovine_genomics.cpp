@@ -50,17 +50,45 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, m;
+    cin >> n >> m;
+    vector<string> a(n), b(n);
+    for (auto &v : a)
+        cin >> v;
+
+    for (auto &v : b)
+        cin >> v;
+
+    int spots = 0;
+    for (int i = 0; i < m; i++)
+    {
+        unordered_map<char, int> umap, umap2;
+        for (int j = 0; j < n; j++)
+        {
+            umap[a[j][i]]++;
+            umap2[b[j][i]]++;
+        }
+        bool pos = true;
+        for (auto a : umap)
+        {
+            if (umap2.count(a.first))
+                pos = false;
+        }
+        if (pos)
+            spots++;
+    }
+    cout << spots << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
+        freopen("cownomics.in", "r", stdin);
+    freopen("cownomics.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

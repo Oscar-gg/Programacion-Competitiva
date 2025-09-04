@@ -50,15 +50,77 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+    c -= a, d -= b;
+
+    if (a > b)
+        swap(a, b);
+
+    if (c > d)
+        swap(c, d);
+
+    bool done = false;
+
+    while (a > 0 || b > 0)
+    {
+        if (a >= b)
+        {
+            break;
+            return;
+        }
+        else
+        {
+            if (done)
+            {
+                cout << "NO\n";
+                return;
+            }
+            b -= 2;
+            if (a > 0)
+            {
+                a--;
+            }
+            else
+            {
+                done = true;
+            }
+        }
+    }
+    done = false;
+    while (c > 0 || d > 0)
+    {
+        if (c >= d)
+        {
+            cout << "YES\n";
+            return;
+        }
+        else
+        {
+            if (done)
+            {
+                cout << "NO\n";
+                return;
+            }
+            d -= 2;
+            if (c > 0)
+            {
+                c--;
+            }
+            else
+            {
+                done = true;
+            }
+        }
+    }
+    cout << "YES\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)

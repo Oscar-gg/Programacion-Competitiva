@@ -50,17 +50,44 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<pair<ll, ll>> p(n);
+    for (int i = 0; i < n; i++)
+        cin >> p[i].first >> p[i].second;
+
+    ll ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i == j)
+                continue;
+            for (int k = 0; k < n; k++)
+            {
+                if (k == i || k == j)
+                    continue;
+
+                // cout << k << "\n";
+                if (p[k].first == p[i].first && p[k].second == p[j].second)
+                {
+                    ans = max(ans, abs(p[k].second - p[i].second) * abs(p[k].first - p[j].first));
+                }
+            }
+        }
+    }
+    cout << ans << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    freopen("triangles.in", "r", stdin);
+    freopen("triangles.out", "w", stdout);
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

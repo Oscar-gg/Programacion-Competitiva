@@ -50,15 +50,66 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, k;
+    cin >> n >> k;
+
+    string s;
+    cin >> s;
+
+    int count = 0;
+    int maxC = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == '1')
+        {
+            count++;
+            maxC = max(maxC, count);
+        }
+        else
+        {
+            count = 0;
+        }
+    }
+
+    bool pos = maxC < k;
+
+    if (pos)
+    {
+        vector<int> permut(n);
+        int val = n;
+        for (int i = 0; i < n; i++)
+        {
+            if (s[i] == '0')
+            {
+                permut[i] = val--;
+            }
+        }
+        for (int i = 0; i < n; i++)
+        {
+            if (s[i] == '1')
+            {
+                permut[i] = val--;
+            }
+        }
+        cout << "YES\n";
+        for (auto p : permut)
+        {
+            cout << p << " ";
+        }
+        cout << "\n";
+    }
+    else
+    {
+        cout << "NO\n";
+    }
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)

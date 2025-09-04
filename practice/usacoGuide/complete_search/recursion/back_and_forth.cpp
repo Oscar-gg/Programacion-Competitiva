@@ -14,6 +14,7 @@
 #include <numeric>
 #include <queue>
 #include <set>
+
 #include <sstream>
 #include <stack>
 #include <stdio.h>
@@ -50,17 +51,64 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int lim = 10;
+    vector<int> a(lim), b(lim);
+
+    for (auto &v : a)
+        cin >> v;
+    for (auto &v : b)
+        cin >> v;
+
+    unordered_set<int> pos;
+
+    for (int i = 0; i < (1 << lim); i++)
+    {
+        int c = 0;
+        int q = 0;
+        for (int j = 0; j < lim; j++)
+        {
+            if (i & (1 << j))
+            {
+                c++;
+                q += a[j];
+            }
+        }
+
+        if (c == lim)
+        {
+            pos.insert(q);
+        }
+        else if (c == lim - 1)
+        {
+            for (int j = 0; j < lim; j++)
+            {
+                pos.insert(q + b[j]);
+            }
+        }
+        else if (c == lim - 2)
+        {
+            for (int j = 0; j < lim; j++)
+            {
+                for (int k = j + 1; k < lim; k++)
+                {
+                    pos.insert(q + b[j] + b[k]);
+                }
+            }
+        }
+    }
+
+    cout << pos.size() << "\n";
 }
 
 int main()
 {
     _;
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
+    freopen("backforth.in", "r", stdin);
+    freopen("backforth.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

@@ -50,17 +50,61 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<unordered_set<string>> v;
+
+    int ans = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        string s;
+        cin >> s;
+        v.push_back({});
+        int c;
+        cin >> c;
+        while (c--)
+        {
+            string s2;
+            cin >> s2;
+            v.back().insert(s2);
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i == j)
+                continue;
+            int common = 0;
+            for (auto val : v[i])
+            {
+                if (v[j].count(val))
+                {
+                    common++;
+                }
+            }
+
+            if (v[j].size() > common)
+                common++;
+
+            ans = max(ans, common);
+        }
+    }
+
+    cout << ans << '\n';
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
+        freopen("guess.in", "r", stdin);
+    freopen("guess.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

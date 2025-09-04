@@ -48,17 +48,50 @@ typedef vector<ii> vii;
 #define MAXN 10
 #define MOD 1000000007
 
+int gcd(int a, int b)
+{
+    if (b == 0)
+        return a;
+    else
+        return gcd(b, a % b);
+}
+
 void s()
 {
+    ll n, k;
+    cin >> n >> k;
+    vector<ll> a(n);
+    for (ll i = 0; i < n; i++)
+        cin >> a[i];
+
+    bool odd = k % 2 == 1;
+
+    for (ll i = 0; i < n; i++)
+    {
+        if (odd)
+        {
+            if (a[i] % 2 == 1)
+                a[i] += k;
+        }
+        else
+        {
+            ll mod = k + 1;
+            a[i] += k * (a[i] % mod);
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << a[i] << " ";
+    }
+    cout << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)

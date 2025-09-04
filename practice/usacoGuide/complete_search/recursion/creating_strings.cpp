@@ -48,8 +48,45 @@ typedef vector<ii> vii;
 #define MAXN 10
 #define MOD 1000000007
 
+void dfs(unordered_set<string> &used, vector<bool> &v, vector<char> &cur, string &o)
+{
+    if (cur.size() == o.size())
+    {
+        string ne(cur.begin(), cur.end());
+        used.insert(ne);
+        return;
+    }
+
+    for (int i = 0; i < v.size(); i++)
+    {
+        if (!v[i])
+        {
+            cur.push_back(o[i]);
+            v[i] = true;
+            dfs(used, v, cur, o);
+            v[i] = false;
+            cur.pop_back();
+        }
+    }
+}
+
 void s()
 {
+    string s;
+    cin >> s;
+    unordered_set<string> used;
+    vector<bool> v(s.size());
+    vector<char> cur;
+    dfs(used, v, cur, s);
+    vector<string> ans(used.begin(), used.end());
+    sort(ans.begin(), ans.end());
+
+    cout << ans.size() << "\n";
+
+    for (auto x : ans)
+    {
+        cout << x << "\n";
+    }
 }
 
 int main()
@@ -59,8 +96,8 @@ int main()
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

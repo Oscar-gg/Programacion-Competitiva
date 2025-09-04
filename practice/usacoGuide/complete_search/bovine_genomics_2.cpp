@@ -50,17 +50,64 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, m;
+    cin >> n >> m;
+    vector<string> a(n), b(n);
+
+    for (auto &v : a)
+        cin >> v;
+    for (auto &v : b)
+        cin >> v;
+
+    int total = 0;
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = i + 1; j < m; j++)
+        {
+            for (int k = j + 1; k < m; k++)
+            {
+                unordered_set<string> pos;
+
+                for (int l = 0; l < n; l++)
+                {
+                    string add = "";
+                    add += a[l][i];
+                    add += a[l][j];
+                    add += a[l][k];
+                    pos.insert(add);
+                }
+                bool feasible = true;
+                for (int l = 0; l < n; l++)
+                {
+                    string add = "";
+                    add += b[l][i];
+                    add += b[l][j];
+                    add += b[l][k];
+                    if (pos.count(add))
+                    {
+                        feasible = false;
+                        break;
+                    }
+                }
+                if (feasible)
+                    total++;
+            }
+        }
+    }
+
+    cout << total << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
-    cin >> t;
-    // t = 1;
+        int t;
+    freopen("cownomics.in", "r", stdin);
+    freopen("cownomics.out", "w", stdout);
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

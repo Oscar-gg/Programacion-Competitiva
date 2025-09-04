@@ -50,6 +50,32 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    ll sum = 0;
+    for (auto &v : a)
+    {
+        cin >> v;
+        sum += v;
+    }
+
+    ll ans = INT_MAX;
+    for (int i = 0; i < (1 << n); i++)
+    {
+        ll s = 0;
+        for (int j = 0; j < n; j++)
+        {
+            if (i & (1 << j))
+            {
+                s += a[j];
+            }
+        }
+
+        ans = min(ans, abs(sum - s - s));
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
@@ -59,8 +85,8 @@ int main()
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

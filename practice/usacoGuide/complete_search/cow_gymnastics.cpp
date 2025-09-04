@@ -50,17 +50,61 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int k, n;
+    cin >> k >> n;
+    vector<vector<int>> p(n);
+
+    for (int j = 0; j < k; j++)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            int next;
+            cin >> next;
+            next--;
+            p[next].push_back(i);
+        }
+    }
+
+    // for (auto x : p)
+    // {
+    //     for (auto y : x)
+    //         cout << y << ' ';
+    //     cout << "\n";
+    // }
+    // cout nl;
+    int consistent = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            bool lo = true, hi = true;
+            for (int l = 0; l < k; l++)
+            {
+                if (p[i][l] > p[j][l])
+                    lo = false;
+
+                if (p[i][l] < p[j][l])
+                    hi = false;
+            }
+            if (lo || hi)
+            {
+                consistent++;
+                // cout << "i " << i << ", j " << j << '\n';
+            }
+        }
+    }
+
+    cout << consistent << "\n";
 }
 
 int main()
 {
-    _;
-
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
+    _
+        freopen("gymnastics.in", "r", stdin);
+    freopen("gymnastics.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

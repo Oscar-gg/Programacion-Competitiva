@@ -48,8 +48,89 @@ typedef vector<ii> vii;
 #define MAXN 10
 #define MOD 1000000007
 
+bool valid(vector<int> &a)
+{
+    for (int i = 0; i < a.size() - 1; i++)
+    {
+        if (abs(a[i] - a[i + 1]) < 2)
+            return false;
+    }
+    return true;
+}
+
 void s()
 {
+    int n;
+    cin >> n;
+
+    if (n <= 4)
+    {
+
+        if (n == 1)
+        {
+            cout << 1 << '\n';
+        }
+        else if (n == 2 || n == 3)
+        {
+            cout << "NO SOLUTION\n";
+        }
+        else
+        {
+            cout << "2 4 1 3\n";
+        }
+        return;
+    }
+
+    vector<int> start = {1, 3, 5, 2, 4};
+    vector<int> a;
+    unordered_set<int> selected;
+
+    for (int i = 0; i < n - 5; i++)
+    {
+        if (i < 5)
+        {
+            a.push_back(start[i]);
+            selected.insert(start[i]);
+        }
+        else
+        {
+            int v = a[i - 5] + 5;
+            selected.insert(v);
+            a.push_back(v);
+        }
+    }
+
+    vector<int> permut;
+    for (int i = 1; i <= n; i++)
+    {
+        if (!selected.count(i))
+            permut.push_back(i);
+    }
+
+    do
+    {
+        if (valid(permut))
+        {
+            if (!a.empty())
+            {
+                if (abs(a.back() - permut.front()) > 1)
+                    break;
+            }
+            else
+            {
+                break;
+            }
+        }
+    } while (next_permutation(all(permut)));
+
+    for (auto v : permut)
+        a.push_back(v);
+
+    for (auto x : a)
+    {
+        cout << x << " ";
+    }
+    cout << "\n";
 }
 
 int main()
@@ -59,8 +140,8 @@ int main()
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

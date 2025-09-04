@@ -50,17 +50,69 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<string> c = {"Bessie", "Buttercup", "Belinda", "Beatrice", "Bella", "Blue", "Betsy", "Sue"};
+    unordered_map<string, vector<string>> cond;
+    sort(all(c));
+
+    for (int i = 0; i < n; i++)
+    {
+        // Buttercup must be milked beside Bella
+        string n1, f, f2, f3, f4, n2;
+        cin >> n1 >> f >> f2 >> f3 >> f4 >> n2;
+        cond[n2].push_back(n1);
+        cond[n1].push_back(n2);
+    }
+
+    do
+    {
+        bool pos = true;
+        for (int i = 0; i < c.size(); i++)
+        {
+            bool next = true;
+            for (auto n : cond[c[i]])
+            {
+                bool f = false;
+                if (i > 0 && c[i - 1] == n)
+                {
+                    f = true;
+                }
+                if (i < c.size() - 1 && c[i + 1] == n)
+                {
+                    f = true;
+                }
+                if (!f)
+                {
+                    next = false;
+                }
+            }
+            if (!next)
+            {
+                pos = false;
+                break;
+            }
+        }
+        if (pos)
+            break;
+
+    } while (next_permutation(all(c)));
+
+    for (auto co : c)
+    {
+        cout << co << "\n";
+    }
 }
 
 int main()
 {
     _;
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
+    freopen("lineup.in", "r", stdin);
+    freopen("lineup.out", "w", stdout);
     int t;
-    cin >> t;
-    // t = 1;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

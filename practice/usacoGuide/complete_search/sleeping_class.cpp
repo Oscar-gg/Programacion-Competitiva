@@ -50,15 +50,73 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto &v : a)
+        cin >> v;
+    vector<int> pref(n);
+    int max_ = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        max_ = max(max_, a[i]);
+        pref[i] = a[i];
+        if (i > 0)
+            pref[i] += pref[i - 1];
+    }
+
+    int ans = 0;
+
+    if (max_ == 0 && pref.back() == 0)
+    {
+        cout << "0\n";
+        return;
+    }
+
+    for (int i = max_; i <= pref.back(); i++)
+    {
+        int count = 0;
+        bool pos = true;
+        int lastId = -1;
+        for (int j = i; j <= pref.back(); j += i)
+        {
+            auto bound = lower_bound(pref.begin(), pref.end(), j);
+            if (bound == pref.end())
+            {
+                pos = false;
+                break;
+            }
+            else
+            {
+                int ix = bound - pref.begin();
+                lastId = ix;
+                if (pref[ix] != j)
+                {
+                    pos = false;
+                    break;
+                }
+                else
+                {
+                    count++;
+                }
+            }
+        }
+        if (pos && lastId == n - 1)
+        {
+            ans = count;
+            break;
+        }
+    }
+
+    cout << n - ans << "\n";
 }
 
 int main()
 {
-    _;
+    _
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t;
+        int t;
     cin >> t;
     // t = 1;
     while (t--)
