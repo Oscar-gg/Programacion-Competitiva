@@ -48,18 +48,71 @@ typedef vector<ii> vii;
 #define MAXN 10
 #define MOD 1000000007
 
+int rep(string &sub, string &s)
+{
+    int reps = 0;
+
+    for (int i = 0; i < s.size(); i++)
+    {
+
+        bool found = true;
+        for (int j = 0; j < sub.size(); j++)
+        {
+            if (i + j >= s.size() || s[i + j] != sub[j])
+            {
+                found = false;
+                break;
+            }
+        }
+        if (found)
+            reps++;
+    }
+
+    return reps;
+}
+
 void s()
 {
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    int a = 1;
+    unordered_map<char, int> umap;
+    for (int i = 1; i <= n; i++)
+    {
+        bool pos = true;
+
+        for (int j = 0; j < n - i; j++)
+        {
+            if (!pos)
+                break;
+            string sub = s.substr(j, i);
+            if (rep(sub, s) > 1)
+            {
+                pos = false;
+            }
+        }
+        if (pos)
+        {
+            a = i;
+            break;
+        }
+    }
+
+    cout << a << "\n";
 }
 
 int main()
 {
     _;
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t = 1;
-    cin >> t;
+    freopen("whereami.in", "r", stdin);
+    freopen("whereami.out", "w", stdout);
+    int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

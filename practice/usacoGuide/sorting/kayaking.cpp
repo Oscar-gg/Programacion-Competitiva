@@ -50,6 +50,36 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+
+    vector<int> a(2 * n);
+
+    for (auto &v : a)
+        cin >> v;
+
+    int ans = INT_MAX;
+    sort(all(a));
+
+    for (int i = 0; i < a.size(); i++)
+    {
+        for (int j = i + 1; j < a.size(); j++)
+        {
+            vector<int> c = a;
+
+            c.erase(c.begin() + j);
+            c.erase(c.begin() + i);
+            int t = 0;
+
+            for (int k = 0; k < c.size(); k += 2)
+            {
+                t += c[k + 1] - c[k];
+            }
+            ans = min(ans, t);
+        }
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
@@ -58,8 +88,9 @@ int main()
 
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
-    int t = 1;
-    cin >> t;
+    int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

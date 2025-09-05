@@ -50,6 +50,37 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> a(m, vector<int>(n));
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            int v;
+            cin >> v;
+            a[j][i] = v;
+        }
+    }
+
+    ll ans = 0;
+    for (int i = 0; i < m; i++)
+    {
+        sort(all(a[i]));
+
+        ll d = 0, prev = 0;
+
+        for (int j = 1; j < n; j++)
+        {
+            d = a[i][j] - a[i][j - 1];
+            prev = prev + d * j;
+            ans += prev;
+        }
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
@@ -58,8 +89,9 @@ int main()
 
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
-    int t = 1;
+    int t;
     cin >> t;
+    // t = 1;
     while (t--)
         s();
     return 0;

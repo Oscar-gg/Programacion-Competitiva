@@ -50,6 +50,26 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n, x;
+    cin >> n >> x;
+    vector<int> a(n);
+    for (auto &v : a)
+        cin >> v;
+    map<int, int> umap;
+
+    // b = t - a
+    for (int i = 0; i < n; i++)
+    {
+
+        if (umap.count(x - a[i]))
+        {
+            cout << umap[x - a[i]] + 1 << " " << i + 1 << "\n";
+            return;
+        }
+
+        umap[a[i]] = i;
+    }
+    cout << "IMPOSSIBLE\n";
 }
 
 int main()
@@ -58,8 +78,9 @@ int main()
 
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
-    int t = 1;
-    cin >> t;
+    int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

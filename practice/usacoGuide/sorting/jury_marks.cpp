@@ -50,6 +50,67 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int k, n;
+    cin >> k >> n;
+
+    vector<int> a(k);
+
+    for (int i = 0; i < k; i++)
+    {
+        cin >> a[i];
+    }
+
+    int st = -1;
+    unordered_set<int> vals;
+    for (int i = 0; i < n; i++)
+    {
+        int v;
+        cin >> v;
+        st = v;
+        vals.insert(v);
+    }
+
+    unordered_set<int> start;
+
+    for (int i = 0; i < k; i++)
+    {
+        unordered_set<int> test;
+        int cur = st;
+        test.insert(st);
+        for (int j = i; j >= 0; j--)
+        {
+            cur -= a[j];
+            test.insert(cur);
+        }
+        int pst = cur;
+
+        cur = st;
+        for (int j = i + 1; j < k; j++)
+        {
+            cur += a[j];
+            test.insert(cur);
+        }
+        bool pos = true;
+        for (auto x : vals)
+        {
+            if (!test.count(x))
+            {
+                pos = false;
+                break;
+            }
+        }
+
+        if (pos)
+        {
+            start.insert(pst);
+        }
+    }
+    int ans = start.size();
+    if (k == n)
+    {
+        ans = min(ans, 1);
+    }
+    cout << ans << "\n";
 }
 
 int main()
@@ -59,7 +120,7 @@ int main()
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         s();
     return 0;

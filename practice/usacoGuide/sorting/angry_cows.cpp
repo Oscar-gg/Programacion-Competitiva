@@ -50,16 +50,65 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto &v : a)
+        cin >> v;
+    sort(all(a));
+    int ans = 1;
+
+    for (int i = 0; i < n; i++)
+    {
+        vector<int> exp(n, -1);
+        int t = 1;
+        exp[i] = t;
+        bool swap = true;
+        while (swap)
+        {
+            swap = false;
+
+            for (int j = 0; j < n; j++)
+            {
+                if (exp[j] == t)
+                {
+                    for (int k = 0; k < n; k++)
+                    {
+                        if (exp[k] != -1)
+                            continue;
+                        if (abs(a[k] - a[j]) <= exp[j])
+                        {
+                            exp[k] = t + 1;
+                            swap = true;
+                        }
+                    }
+                }
+            }
+            t++;
+        }
+
+        int temp = 0;
+        for (auto e : exp)
+        {
+            if (e != -1)
+                temp++;
+        }
+
+        ans = max(ans, temp);
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
 {
     _;
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t = 1;
-    cin >> t;
+    freopen("angry.in", "r", stdin);
+    freopen("angry.out", "w", stdout);
+    int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

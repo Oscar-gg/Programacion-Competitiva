@@ -50,6 +50,41 @@ typedef vector<ii> vii;
 
 void s()
 {
+    ll n;
+    cin >> n;
+    vector<ll> a(n), b(n), c(n);
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> b[i];
+    }
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> c[i];
+    }
+
+    unordered_map<ll, ll> umap;
+    for (ll i = 0; i < n; i++)
+    {
+        umap[b[c[i] - 1]]++;
+    }
+
+    // for (auto x : umap)
+    // {
+    //     cout << x.first << " " << x.second << "\n";
+    // }
+
+    ll ans = 0;
+
+    for (ll i = 0; i < n; i++)
+    {
+        if (umap.count(a[i]))
+            ans += umap[a[i]];
+    }
+    cout << ans << "\n";
 }
 
 int main()
@@ -59,7 +94,7 @@ int main()
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         s();
     return 0;

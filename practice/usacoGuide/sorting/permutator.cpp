@@ -50,6 +50,67 @@ typedef vector<ii> vii;
 
 void s()
 {
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    for (auto &v : a)
+        cin >> v;
+    vector<ll> b(n);
+    for (auto &v : b)
+        cin >> v;
+
+    ll cD = n - 2, prev = n;
+    for (int i = 0; i < n / 2; i++)
+    {
+        a[i] *= prev;
+        a[n - i - 1] *= prev;
+        prev = prev + cD;
+        cD = cD - 2;
+    }
+
+    if (n % 2 == 1)
+    {
+        a[n / 2] *= prev;
+    }
+
+    // for (auto v : a)
+    // {
+    //     cout << v << " ";
+    // }
+    // cout nl;
+
+    sort(all(a));
+    sort(b.rbegin(), b.rend());
+
+    ll ans = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        ans += a[i] * b[i];
+    }
+
+    cout << ans << "\n";
+
+    // for (int i = 1; i < 10; i++)
+    // {
+    //     vector<int> c(i);
+
+    //     for (int j = 0; j < i; j++)
+    //     {
+    //         for (int k = j; k < i; k++)
+    //         {
+    //             for (int l = j; l <= k; l++)
+    //             {
+    //                 c[l]++;
+    //             }
+    //         }
+    //     }
+    //     for (auto v : c)
+    //     {
+    //         cout << v << " ";
+    //     }
+    //     cout << "\n";
+    // }
 }
 
 int main()
@@ -58,8 +119,9 @@ int main()
 
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
-    int t = 1;
-    cin >> t;
+    int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

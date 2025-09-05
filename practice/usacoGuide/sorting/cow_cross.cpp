@@ -50,16 +50,42 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+
+    vector<pair<int, int>> p(n);
+    for (auto &v : p)
+    {
+        cin >> v.first >> v.second;
+    }
+
+    sort(all(p));
+    int ct = 0;
+
+    for (auto v : p)
+    {
+        if (v.first > ct)
+        {
+            ct = v.first + v.second;
+        }
+        else
+        {
+            ct = ct += v.second;
+        }
+    }
+
+    cout << ct << "\n";
 }
 
 int main()
 {
     _;
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
-    int t = 1;
-    cin >> t;
+    freopen("cowqueue.in", "r", stdin);
+    freopen("cowqueue.out", "w", stdout);
+    int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

@@ -50,6 +50,15 @@ typedef vector<ii> vii;
 
 void s()
 {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (auto &v : a)
+        cin >> v;
+    sort(a.begin(), a.end());
+    a.erase(unique(all(a)), a.end());
+
+    cout << a.size() << "\n";
 }
 
 int main()
@@ -58,8 +67,9 @@ int main()
 
     // freopen("file.in", "r", stdin);
     // freopen("file.out", "w", stdout);
-    int t = 1;
-    cin >> t;
+    int t;
+    // cin >> t;
+    t = 1;
     while (t--)
         s();
     return 0;

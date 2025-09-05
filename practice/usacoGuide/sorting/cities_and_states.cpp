@@ -50,16 +50,48 @@ typedef vector<ii> vii;
 
 void s()
 {
+    ll n;
+    cin >> n;
+    map<pair<string, string>, ll> umap;
+
+    for (ll i = 0; i < n; i++)
+    {
+        string s1, s2;
+        cin >> s1 >> s2;
+
+        umap[{s1.substr(0, 2), s2}]++;
+    }
+
+    ll count = 0;
+
+    //    set<pair<string, string>> v;
+
+    for (auto x : umap)
+    {
+        // if (v.count(x.first))
+        //     continue;
+
+        // cout << x.first.first << " " << x.first.second << " " << x.second << "\n";
+        pair<string, string> p = {x.first.second, x.first.first};
+        if (umap.count(p) && x.first.second != x.first.first)
+        {
+            count += umap[p] * x.second;
+            // v.insert(p);
+        }
+    }
+    // dbg(count);
+
+    cout << count / 2 << "\n";
 }
 
 int main()
 {
     _;
 
-    // freopen("file.in", "r", stdin);
-    // freopen("file.out", "w", stdout);
+    freopen("citystate.in", "r", stdin);
+    freopen("citystate.out", "w", stdout);
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
         s();
     return 0;
