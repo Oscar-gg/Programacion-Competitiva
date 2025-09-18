@@ -1,0 +1,131 @@
+#include <algorithm>
+#include <bitset>
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <deque>
+#include <fstream>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <limits.h>
+#include <map>
+#include <math.h>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <utility>
+#include <vector>
+#include <unordered_set>
+#include <unordered_map>
+
+#define PI 3.141592653589793
+#define EPS 0.000000001
+#define INF 1000000000
+
+#define _ ios_base::sync_with_stdio(0), cin.tie(0), cin.tie(0), cout.tie(0), cout.precision(15);
+#define FOR(i, a, b) for (int i = int(a); i < int(b); i++)
+#define RFOR(i, a, b) for (int i = int(a) - 1; i >= int(b); i--)
+#define FORC(cont, it) for (typeof((cont).begin()) it = (cont).begin(); it != (cont).end(); it++)
+#define RFORC(cont, it) for (typeof((cont).rbegin()) it = (cont).rbegin(); it != (cont).rend(); it++)
+#define pb push_back
+#define dbg(v) cout << "Line(" << __LINE__ << ") -> " << #v << " = " << (v) << endl;
+#define all(x) x.begin(), x.end()
+#define nl << "\n"
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<int, int> ii;
+typedef vector<int> vi;
+typedef vector<ii> vii;
+
+#define MAXN 10
+#define MOD 1000000007
+
+void s()
+{
+    ll n, k;
+    cin >> n >> k;
+    vector<ll> a(n);
+    priority_queue<ll> pq;
+
+    for (auto &v : a)
+    {
+        cin >> v;
+        pq.push(v);
+    }
+
+    vector<ll> b(k);
+    priority_queue<ll, vector<ll>, greater<ll>> pq2;
+    for (auto &v : b)
+    {
+        cin >> v;
+        pq2.push(v);
+    }
+
+    ll ans = 0;
+
+    ll cur = n;
+
+    while (!pq.empty())
+    {
+        auto f = pq.top();
+        pq.pop();
+
+        ll d = -1;
+        while (!pq2.empty())
+        {
+            d = pq2.top();
+            pq2.pop();
+            if (d <= cur)
+            {
+                break;
+            }
+            else
+            {
+                d = -1;
+            }
+        }
+
+        if (d != -1)
+        {
+            for (int i = 0; i < d - 1; i++)
+            {
+                if (i != d - 2)
+                {
+                    ans += pq.top();
+                }
+                pq.pop();
+            }
+            if (d > 1)
+                ans += f;
+            cur -= d;
+        }
+        else
+        {
+            ans += f;
+            cur--;
+        }
+    }
+
+    cout << ans << "\n";
+}
+
+int main()
+{
+    _;
+
+    // freopen("file.in", "r", stdin);
+    // freopen("file.out", "w", stdout);
+    int t = 1;
+    cin >> t;
+    while (t--)
+        s();
+    return 0;
+}
