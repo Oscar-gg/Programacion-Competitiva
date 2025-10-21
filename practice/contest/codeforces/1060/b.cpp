@@ -35,6 +35,8 @@
 #define RFORC(cont, it) for (typeof((cont).rbegin()) it = (cont).rbegin(); it != (cont).rend(); it++)
 #define pb push_back
 #define dbg(v) cout << "Line(" << __LINE__ << ") -> " << #v << " = " << (v) << endl;
+#define all(x) x.begin(), x.end()
+#define nl << "\n"
 
 using namespace std;
 
@@ -46,45 +48,60 @@ typedef vector<ii> vii;
 #define MAXN 10
 #define MOD 1000000007
 
-int remove(int num)
+void s()
 {
-    int cnum = num;
-    int ret = 0;
+    int n;
+    cin >> n;
+    int max_ = 0;
+    vector<int> a(n);
 
-    while (num > 0)
+    for (int i = 0; i < n; i++)
     {
-        ret += num % 10;
-        num /= 10;
+        int v;
+        cin >> v;
+
+        a[i] = v;
+        max_ = max(v, max_);
+        if (i % 2 == 1)
+        {
+            a[i] = max_;
+        }
     }
-    return ret;
+
+    int ans = 0;
+
+    for (int i = 0; i < n; i += 2)
+    {
+        int p2 = 0;
+
+        if (i - 1 >= 0)
+        {
+            p2 = max(0, a[i] + 1 - a[i - 1]);
+        }
+
+        int p1 = 0;
+
+        if (i + 1 < n)
+        {
+            p1 = max(0, a[i] + 1 - a[i + 1]);
+        }
+
+        if (p1 || p2)
+            ans += max(p1, p2);
+    }
+
+    cout << ans << "\n";
 }
 
 int main()
 {
     _;
-    int n, k;
-    cin >> n >> k;
-    vector<int> cnt(1e6 + 1);
-    for (int i = 0; i < n; i++)
-    {
-        int next;
-        cin >> next;
-        cnt[next]++;
-    }
 
-    for (int i = 1e6; i >= 0; i--)
-    {
-        k -= cnt[i];
-        if (k <= 0)
-        {
-
-            cout << remove(i) << "\n";
-            return 0;
-        }
-        cnt[i - remove(i)] += cnt[i];
-    }
-
-    cout << 0 << "\n";
-
+    // freopen("file.in", "r", stdin);
+    // freopen("file.out", "w", stdout);
+    int t = 1;
+    cin >> t;
+    while (t--)
+        s();
     return 0;
 }
