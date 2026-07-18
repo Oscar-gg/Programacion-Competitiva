@@ -80,6 +80,17 @@
         "__bit_reference": "cpp",
         "__hash_table": "cpp",
         "__tree": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "any": "cpp",
+        "bit": "cpp",
+        "charconv": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "coroutine": "cpp",
+        "optional": "cpp",
+        "numbers": "cpp",
+        "stop_token": "cpp",
+        "syncstream": "cpp",
+        "variant": "cpp"
     },
 }
